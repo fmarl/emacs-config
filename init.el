@@ -57,7 +57,7 @@
   (("M-<f5>" . modus-themes-rotate)
    ("C-<f5>" . modus-themes-select))
   :config
-  (modus-themes-load-theme 'ef-maris-dark))
+  (modus-themes-load-theme 'ef-owl))
 
 ;; Which-key (Shortcut-Hilfe)
 (use-package which-key :config (which-key-mode))
