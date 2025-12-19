@@ -99,4 +99,5 @@
 
 (use-package nix-ts-mode
   :init (setq treesit-font-lock-level 4)
+  :hook (nix-ts-mode . nixcmds-mode)
   :mode "\\.nix\\'")

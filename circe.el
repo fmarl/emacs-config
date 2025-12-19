@@ -8,4 +8,12 @@
 	'(("Libera Chat"
            :tls t
            :channels ("#guix")
-           ))))
+           )
+	  ("Furnet"
+	   :tls t
+	   :nick "PaX"
+	   :user "PaX"
+	   :realname "PaX"
+	   :host "alicorn.furnet.org"
+	   :port (6667 . 6697)
+	   :channels ("#pool")))))
