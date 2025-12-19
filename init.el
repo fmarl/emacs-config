@@ -75,7 +75,7 @@
         dirvish-attributes '(subtree-state collapse git-msg)))
 
 ;; Ace / Jump Navigation
-(use-package ace-window :bind (("M-p" . ace-window)))
+(use-package ace-window :bind (("M-o" . ace-window)))
 (use-package avy
   :bind (("C-:" . avy-goto-char-timer)
 	 ("M-g -" . avy-kill-region)
