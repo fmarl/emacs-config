@@ -70,6 +70,8 @@
 ;; File Explorer
 (use-package dirvish
   :init (dirvish-override-dired-mode)
+  :bind
+  (("<f6>" . dirvish-dwim))
   :config
   (setq dirvish-default-layout '(0 0.3 0.7)
         dirvish-attributes '(subtree-state collapse git-msg)))
@@ -183,6 +185,22 @@
 
 (use-package vertico
   :init (vertico-mode))
+
+;; Custom functions
+
+(defun update-config ()
+  (interactive)
+  (let ((config-dir (expand-file-name "~/.emacs.d/"))
+	(init-file (expand-file-name "~/.emacs.d/init.el"))
+	(buffer (get-buffer-create "*git*")))
+    (progn
+      (start-process
+       "git"
+       buffer
+       "git"
+       "pull"
+       config-dir)
+      (load-file init-file))))
 
 (defun load-conf-file (file)
   (interactive "f")

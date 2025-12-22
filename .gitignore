@@ -22,6 +22,7 @@ eln-cache/
 elpa/
 snippets/
 transient/
+eshell/
 
 # Generated files
 *.eld
