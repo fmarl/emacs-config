@@ -3,6 +3,8 @@
   :init
   (setq rustic-lsp-server 'rust-analyzer)
   (setq rustic-format-on-save t)
+  :hook
+  (rustic-mode . eglot-ensure)
   :config
   (add-hook 'rustic-mode-hook #'lsp-deferred)
   (add-hook 'lsp-mode-hook #'yas-minor-mode)

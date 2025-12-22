@@ -202,16 +202,15 @@
 (if (string-match "darwin" (emacs-version))
     (load-conf-file "lex.el"))
 
-(defun pinentry-emacs (desc prompt ok error)
-  (let ((str (read-passwd (concat (replace-regexp-in-string "%22" "\"" (replace-regexp-in-string "%0A" "\n" desc)) prompt ": "))))
-    str))
-
 (add-to-list 'auto-mode-alist
              '("\\.json\\'" . (lambda ()
                                 (javascript-mode)
                                 (json-pretty-print (point-min) (point-max))
                                 (goto-char (point-min))
                                 (set-buffer-modified-p nil))))
+
+(require 'epg)
+(setq epg-pinentry-mode 'loopback)
 
 (provide 'init)
 (custom-set-variables

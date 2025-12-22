@@ -2,7 +2,8 @@
 
 (use-package python
   :ensure t
-  :hook ((python-mode . (lambda ()
+  :hook ((python-mode . eglot-ensure)
+	 (python-mode . (lambda ()
                           (setq tab-width 4)
                           (setq python-indent-offset 4))))
   :config
@@ -12,11 +13,6 @@
     :custom
     (blacken-allow-py36 t)
     (blacken-line-length 88)))
-
-;; Snippets
-(use-package yasnippet
-  :hook (python-mode . yas-minor-mode))
-(use-package yasnippet-snippets)
 
 ;; Linting with ruff
 (use-package flycheck
