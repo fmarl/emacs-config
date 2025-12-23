@@ -15,6 +15,11 @@
   :type 'integer
   :group 'worktime)
 
+(defcustom break-per-day 30
+  "How many minutes do you make break"
+  :type 'integer
+  :group 'worktime)
+
 (defvar worktime--start-time nil)
 
 (defvar worktime--end-time nil)
@@ -35,7 +40,7 @@
   (let ((minutes-per-day (* 24 60)))
     (if (not (null worktime--start-time))
 	(setq worktime--end-time
-	      (mod (+ worktime--start-time (+ (* hours 60) minutes)) minutes-per-day))
+	      (mod (+ worktime--start-time (+ (* hours 60) minutes break-per-day)) minutes-per-day))
       '())))
 
 (defun worktime--to-string (sign time)
