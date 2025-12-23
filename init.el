@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;; init.el --- Main configuration -*- lexical-binding: t; -*-
 
 (require 'package)
 (package-initialize)
@@ -188,6 +188,10 @@
 
 ;; Custom functions
 
+(defun enable-lang (lang)
+  (interactive "sLang: ")
+  (require (intern (concat "lang-" lang))))
+
 (defun update-config ()
   (interactive)
   (let ((config-dir (expand-file-name "~/.emacs.d/"))
@@ -206,19 +210,11 @@
   (interactive "f")
   (load-file (concat (concat (getenv "HOME") "/.emacs.d/") file)))
 
-(load-conf-file "completion.el")
-(load-conf-file "eglot.el")
-(load-conf-file "org.el")
-(load-conf-file "circe.el")
-(load-conf-file "magit.el")
-(load-conf-file "mu4e.el")
-(load-conf-file "ocaml.el")
-(load-conf-file "nix.el")
-(load-conf-file "worktime.el")
+(dolist (config '("completion.el" "eglot.el" "org.el" "circe.el" "magit.el" "mu4e.el"))
+  (load-conf-file config))
+
 (if (string-match "darwin" (emacs-version))
     (load-conf-file "lex.el"))
-
-(worktime-mode)
 
 (add-to-list 'auto-mode-alist
              '("\\.json\\'" . (lambda ()
@@ -229,6 +225,8 @@
 
 (require 'epg)
 (setq epg-pinentry-mode 'loopback)
+
+(add-to-list 'load-path "~/.emacs.d/lisp/langs/")
 
 (provide 'init)
 (custom-set-variables

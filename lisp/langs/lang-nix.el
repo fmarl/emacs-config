@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;;; lang-nix.el --- Nix development setup -*- lexical-binding: t; -*-
 
 (defgroup nixcmds nil
   "Run Nix commands from Emacs."
@@ -101,3 +101,5 @@
   :init (setq treesit-font-lock-level 4)
   :hook (nix-ts-mode . nixcmds-mode)
   :mode "\\.nix\\'")
+
+(provide 'lang-nix)

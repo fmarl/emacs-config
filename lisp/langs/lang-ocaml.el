@@ -1,3 +1,5 @@
+;;; lang-ocaml.el --- OCaml development setup -*- lexical-binding: t; -*-
+
 (use-package tuareg
   :defer t
   :mode (("\\.ocamlinit\\'" . tuareg-mode)))
@@ -7,3 +9,5 @@
   (add-hook 'tuareg-mode-hook #'utop-minor-mode))
 
 (use-package dune)
+
+(provide 'lang-ocaml)

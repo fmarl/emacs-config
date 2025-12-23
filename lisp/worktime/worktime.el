@@ -1,4 +1,12 @@
-;; -*- lexical-binding: t; -*-
+;;; worktime.el --- Calculate the remaining time for the current working day -*- lexical-binding: t; -*-
+
+;; Author: Florian Marrero Liestmann <f.m.liestmann@fx-ttr.de>
+;; Version: 0.1
+;; Package-Requires: ((emacs "27.1"))
+;; Keywords: tools
+;; URL: https://github.com/fmarl/worktime.el
+
+;;; Code:
 
 (defgroup worktime nil
   "Calculate the remaining worktime in the mode-line"
@@ -81,7 +89,6 @@
   (when worktime--timer
     (cancel-timer worktime--timer)
     (setq worktime--timer nil)))
-
 (defun worktime--register-modeline ()
   (add-to-list 'minor-mode-alist
 	       '(worktime-mode (:eval worktime--modeline-string))))
@@ -96,3 +103,5 @@
 	(worktime--start-timer)
 	(worktime--update))
     (worktime--stop-timer)))
+
+(provide 'worktime)

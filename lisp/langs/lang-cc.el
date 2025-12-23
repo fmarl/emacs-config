@@ -1,3 +1,5 @@
+;;; lang-cc.el --- C/C++ development setup -*- lexical-binding: t; -*-
+
 (use-package cc-mode
   :ensure nil
   :hook ((c-mode c++-mode) . (lambda ()
@@ -5,3 +7,5 @@
                                (c-set-offset 'substatement-open 0))))
 
 (use-package clang-format :defer t)
+
+(provide 'lang-cc)

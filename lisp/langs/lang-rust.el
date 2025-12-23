@@ -1,3 +1,5 @@
+;;; lang-rust.el --- Rust development setup -*- lexical-binding: t; -*-
+
 (use-package rustic
   :defer t
   :init
@@ -17,3 +19,5 @@
 (with-eval-after-load 'rustic
   (define-key rustic-mode-map (kbd "C-c C-c c") #'rustic-cargo-check)
   (define-key rustic-mode-map (kbd "C-c C-c r") #'rustic-cargo-run))
+
+(provide 'lang-rust)

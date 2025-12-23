@@ -1,4 +1,4 @@
-;;; python.el --- Python development setup -*- lexical-binding: t; -*-
+;;; lang-python.el --- Python development setup -*- lexical-binding: t; -*-
 
 (use-package python
   :ensure t
@@ -21,5 +21,4 @@
   (setq flycheck-python-pycompile-executable "python3")
   (setq flycheck-python-flake8-executable "ruff"))
 
-(provide 'python)
-;;; python.el ends here
+(provide 'lang-python)

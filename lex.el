@@ -32,3 +32,7 @@
 (defun edit-git-shepherd ()
   (interactive)
   (find-file-other-window (expand-file-name "~/.git-shepherd")))
+
+(use-package worktime
+  :load-path "~/.emacs.d/lisp/worktime/"
+  :config (worktime-mode))
