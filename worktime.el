@@ -29,6 +29,7 @@
 (defvar worktime--timer nil)
 
 (defun worktime--start-work (hour minute)
+  (interactive "nStart Hour: \nnStart Minute: ")
   (let* ((minutes-per-day (* 24 60))
 	 (start-time (mod (+ (mod (+ (* hour 60) minute) minutes-per-day) minutes-per-day) minutes-per-day)))
     (progn
