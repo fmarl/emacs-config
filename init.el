@@ -214,8 +214,11 @@
 (load-conf-file "mu4e.el")
 (load-conf-file "ocaml.el")
 (load-conf-file "nix.el")
+(load-conf-file "worktime.el")
 (if (string-match "darwin" (emacs-version))
     (load-conf-file "lex.el"))
+
+(worktime-mode)
 
 (add-to-list 'auto-mode-alist
              '("\\.json\\'" . (lambda ()
