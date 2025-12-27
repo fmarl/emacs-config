@@ -210,7 +210,7 @@
   (interactive "f")
   (load-file (concat (concat (getenv "HOME") "/.emacs.d/") file)))
 
-(dolist (config '("completion.el" "eglot.el" "org.el" "circe.el" "magit.el" "mu4e.el"))
+(dolist (config '("completion.el" "eglot.el" "org.el" "circe.el" "magit.el" "mu4e.el" "elfeed.el"))
   (load-conf-file config))
 
 (if (string-match "darwin" (emacs-version))
