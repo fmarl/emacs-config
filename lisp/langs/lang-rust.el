@@ -1,10 +1,17 @@
 ;;; lang-rust.el --- Rust development setup -*- lexical-binding: t; -*-
 
+(use-package rust-mode
+  :ensure t
+  :init
+  (setq rust-mode-treesitter-derive t))
+
 (use-package rustic
-  :defer t
+  :ensure t
+  :after (rust-mode)
   :init
   (setq rustic-lsp-server 'rust-analyzer)
   (setq rustic-format-on-save t)
+  (setq rustic-lsp-client 'eglot)
   :hook
   (rustic-mode . eglot-ensure)
   :config

@@ -2,6 +2,7 @@
 
 (use-package tuareg
   :defer t
+  :hook (tuareg-mode . eglot-ensure)
   :mode (("\\.ocamlinit\\'" . tuareg-mode)))
 
 (use-package utop
