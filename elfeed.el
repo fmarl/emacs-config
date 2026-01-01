@@ -2,7 +2,8 @@
   :ensure t
   :config
   (setq elfeed-feeds
-	'("https://feeds.arstechnica.com/arstechnica/technology-lab"
+	'("https://planet.guix.gnu.org/atom.xml"
+	  "https://feeds.arstechnica.com/arstechnica/technology-lab"
 	  "https://bleepingcomputer.com/feed/"
 	  "https://googleonlinesecurity.blogspot.com/atom.xml"
 	  "https://googleprojectzero.blogspot.com/feeds/posts/default"
