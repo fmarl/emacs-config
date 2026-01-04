@@ -1,13 +1,14 @@
 (use-package circe
   :ensure t
   :config
-  (setq circe-default-realname "Florian M.L."
+  (setq circe-default-realname "fmarl"
 	circe-default-nick "fmarl"
 	circe-default-user "fmarl")
   (setq circe-network-options
-	'(("Libera Chat"
+	'(("OTW"
            :tls t
-           :channels ("#guix")
+	   :host "ircs.overthewire.org"
+	   :port 6697
            )
 	  ("Furnet"
 	   :tls t
