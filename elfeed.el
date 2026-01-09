@@ -2,20 +2,21 @@
   :ensure t
   :config
   (setq elfeed-feeds
-	'(("https://feeds.arstechnica.com/arstechnica/technology-lab" news)
-	  ("https://bleepingcomputer.com/feed/" news)
-	  ("https://googleonlinesecurity.blogspot.com/atom.xml" news google)
-	  ;;("https://googleprojectzero.blogspot.com/feeds/posts/default" news google)
-	  ("https://bughunters.google.com/feed/en" google)
-	  "https://www.grahamcluley.com/feed/"
-	  "https://jfrog.com/blog/feed"
-	  "https://krebsonsecurity.com/feed/"
-	  "https://www.schneier.com/feed/atom/"
-	  "https://feeds.feedburner.com/TroyHunt"
+	'(("https://feeds.arstechnica.com/arstechnica/technology-lab" news security)
+	  ("https://bleepingcomputer.com/feed/" news security)
+	  ("https://googleonlinesecurity.blogspot.com/atom.xml" news google security)
+	  ("https://bughunters.google.com/feed/en" google security)
+	  ("https://www.grahamcluley.com/feed/" security)
+	  ("https://jfrog.com/blog/feed" security)
+	  ("https://krebsonsecurity.com/feed/" security)
+	  ("https://www.schneier.com/feed/atom/" security crypto)
+	  ("https://feeds.feedburner.com/TroyHunt" security)
 	  ("https://feeds.feedburner.com/TheHackersNews" news)
 	  ("https://lobste.rs/top/rss" tech)
-	  "https://risky.biz/feeds/risky-business/"
-	  "https://risky.biz/feeds/risky-business-news/"
+	  ("https://lwn.net/headlines/rss" tech kernel)
+	  ("https://www.kernel.org/feeds/kdist.xml" kernel)
+	  ("https://risky.biz/feeds/risky-business/" security)
+	  ("https://risky.biz/feeds/risky-business-news/" security)
 	  ("https://www.theregister.com/security/research/headlines.atom" news)
 	  ("https://www.theregister.com/security/patches/headlines.atom" news)
 	  ("https://www.theregister.com/security/cyber_crime/headlines.atom" news)
