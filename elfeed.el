@@ -32,4 +32,6 @@
 	  ("https://blog.pi3.com.pl/?feed=rss2" vuln)
 	  ("https://www.matteomalvica.com/index.xml" vuln)
 	  ("https://blog.badsectorlabs.com/feeds/all.atom.xml" vuln)
-	  ("https://fareedfauzi.github.io/feed" vuln))))
+	  ("https://fareedfauzi.github.io/feed" vuln)
+	  ("https://seclists.org/rss/oss-sec.rss" mail)
+	  ("https://seclists.org/rss/fulldisclosure.rss" mail))))
