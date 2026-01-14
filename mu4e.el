@@ -55,9 +55,9 @@
   (setq mu4e-reply-keep-subject t)
 
   (setq mu4e-use-fancy-chars nil)
-  (setq mu4e-attachment-dir nil)
   (setq mu4e-view-show-images nil)
   (setq mu4e-view-show-addresses t)
+  (setq mu4e-change-filenames-when-moving t)
 
   (setq mu4e-sent-folder   "/Sent"
         mu4e-drafts-folder "/Drafts"
@@ -69,8 +69,8 @@
 
   (setq mu4e-maildir-shortcuts
         '(("/INBOX"          . ?i)
-          ("/linux-kernel"   . ?k)
-          ("/linux-janitors" . ?j)
+          ("/kernel-linux"   . ?k)
+          ("/kernel-janitors" . ?j)
           ("/guix-devel"     . ?g)
           ("/Sent"           . ?s)
           ("/Archive"        . ?a)))
