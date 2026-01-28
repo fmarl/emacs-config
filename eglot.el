@@ -5,8 +5,8 @@
   :config
   (setq eglot-sync-connect nil
         eglot-autoshutdown t
-        eglot-events-buffer-size 0
-        eglot-extend-to-xref t)
+        eglot-extend-to-xref t
+	eglot-code-action-indicator "*>")
   	       
   (add-hook 'eglot-managed-mode-hook
             (lambda ()

@@ -15,7 +15,6 @@
   :hook
   (rustic-mode . eglot-ensure)
   :config
-  (add-hook 'rustic-mode-hook #'lsp-deferred)
   (add-hook 'lsp-mode-hook #'yas-minor-mode)
   ;; configure inlay hints und andere Optionen
   (setq lsp-rust-analyzer-display-parameter-hints t

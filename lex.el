@@ -36,3 +36,17 @@
 (use-package worktime
   :load-path "~/.emacs.d/lisp/worktime/"
   :config (worktime-mode))
+
+(use-package inheritenv
+  :ensure t)
+
+(use-package vterm
+  :ensure t)
+
+(use-package claude-code
+  :ensure t
+  :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
+  :bind-keymap ("C-x c" . claude-code-command-map)
+  :config
+  (claude-code-mode)
+  (setq claude-code-terminal-backend 'vterm))

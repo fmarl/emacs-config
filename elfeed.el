@@ -11,6 +11,7 @@
 	  ("https://krebsonsecurity.com/feed/" security)
 	  ("https://www.schneier.com/feed/atom/" security crypto)
 	  ("https://feeds.feedburner.com/TroyHunt" security)
+	  ("https://feedfry.com/rss/11f0f1f20f2f93aa96c7f28157abe8ad" ai security)
 	  ("https://feeds.feedburner.com/TheHackersNews" news)
 	  ("https://lobste.rs/top/rss" tech)
 	  ("https://lwn.net/headlines/rss" tech kernel)

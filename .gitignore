@@ -29,3 +29,7 @@ eshell/
 smex-items
 tramp
 network-security.data
+.org-id-locations
+bookmarks
+org-roam.db
+projects
