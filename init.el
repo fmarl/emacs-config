@@ -42,6 +42,8 @@
 ;; Kill the last word instead of using backspace
 (global-set-key "\C-w" 'backward-kill-word)
 (global-set-key "\C-x\C-k" 'kill-region)
+(global-set-key "\C-c\C-sl" 'scroll-lock-mode)
+(global-set-key "\C-c\C-sa" 'scroll-all-mode)
 
 ;;; -------------------------
 
@@ -210,7 +212,7 @@
   (interactive "f")
   (load-file (concat (concat (getenv "HOME") "/.emacs.d/") file)))
 
-(dolist (config '("completion.el" "eglot.el" "org.el" "circe.el" "magit.el" "mu4e.el" "elfeed.el"))
+(dolist (config '("meow.el" "completion.el" "eglot.el" "org.el" "circe.el" "magit.el" "mu4e.el" "elfeed.el"))
   (load-conf-file config))
 
 (if (string-match "darwin" (emacs-version))
