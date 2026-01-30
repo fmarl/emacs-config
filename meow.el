@@ -1,5 +1,9 @@
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+  (add-to-list 'meow-mode-state-list
+               '(magit-mode . motion))
+  (add-to-list 'meow-mode-state-list
+               '(magit-status-mode . motion))
   (meow-motion-overwrite-define-key
    '("j" . meow-next)
    '("k" . meow-prev)
@@ -18,6 +22,7 @@
    '("j" . "h-j")
    '("k" . "h-k")
    '("/" . "h-/")
+   '("f" . consult-ripgrep)
    ;; use spc (0-9) for digit arguments.
    '("1" . meow-digit-argument)
    '("2" . meow-digit-argument)
@@ -116,6 +121,6 @@
 
 (use-package meow
   :ensure t
-  :init
+  :config
   (meow-setup)
   (meow-global-mode 1))
