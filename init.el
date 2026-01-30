@@ -164,13 +164,6 @@
         xref-show-definitions-function #'consult-xref)
 
   :config
-  (consult-customize
-   consult-theme :preview-key '(:debounce 0.2 any)
-   consult-ripgrep consult-git-grep consult-grep consult-man
-   consult-bookmark consult-recent-file consult-xref
-   consult--source-bookmark consult--source-file-register
-   consult--source-recent-file consult--source-project-recent-file
-   :preview-key '(:debounce 0.4 any))
   (setq consult-narrow-key "<") ;; "C-+"
   (setq consult-ripgrep-command
 	"rg --null --line-buffered --color=never --max-columns=1000 --path-separator --smart-case --no-heading --with-filename --line-number --search-zip --hidden --glob '!.git/*' --glob '!.direnv/*'")
@@ -212,7 +205,7 @@
   (interactive "f")
   (load-file (concat (concat (getenv "HOME") "/.emacs.d/") file)))
 
-(dolist (config '("meow.el" "completion.el" "eglot.el" "org.el" "circe.el" "magit.el" "mu4e.el" "elfeed.el"))
+(dolist (config '("completion.el" "eglot.el" "org.el" "circe.el" "magit.el" "mu4e.el" "elfeed.el" "meow.el"))
   (load-conf-file config))
 
 (if (string-match "darwin" (emacs-version))
