@@ -11,9 +11,7 @@
    )
   (setq meow-selection-command-fallback
         '((meow-change . meow-change-char)
-          (meow-kill . meow-c-k)
-          ;;(meow-kill . meow-delete)
-          ;; (meow-cancel-selection . keyboard-quit)
+          (meow-kill . meow-delete)
           (meow-cancel-selection . ignore)
           (meow-pop-selection . meow-pop-grab)
           (meow-beacon-change . meow-beacon-change-char)))
@@ -22,7 +20,9 @@
    '("j" . "h-j")
    '("k" . "h-k")
    '("/" . "h-/")
-   '("f" . consult-ripgrep)
+   '("r" . consult-ripgrep)
+   '("f" . find-file)
+   '("b" . consult-buffer)
    ;; use spc (0-9) for digit arguments.
    '("1" . meow-digit-argument)
    '("2" . meow-digit-argument)
@@ -36,6 +36,7 @@
    '("0" . meow-digit-argument)
    '("/" . meow-keypad-describe-key)
    '("?" . meow-cheatsheet))
+  
   (meow-normal-define-key
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)
