@@ -182,34 +182,17 @@
   :init (vertico-mode))
 
 ;; Custom functions
-
-(defun enable-lang (lang)
-  (interactive "sLang: ")
-  (require (intern (concat "lang-" lang))))
-
-(defun update-config ()
-  (interactive)
-  (let ((config-dir (expand-file-name "~/.emacs.d/"))
-	(init-file (expand-file-name "~/.emacs.d/init.el"))
-	(buffer (get-buffer-create "*git*")))
-    (progn
-      (start-process
-       "git"
-       buffer
-       "git"
-       "pull"
-       config-dir)
-      (load-file init-file))))
-
-(defun load-conf-file (file)
+(defun my/load-conf-file (file)
   (interactive "f")
   (load-file (concat (concat (getenv "HOME") "/.emacs.d/") file)))
 
+(my/load-conf-file "my.el")
+
 (dolist (config '("completion.el" "eglot.el" "org.el" "circe.el" "magit.el" "mu4e.el" "elfeed.el" "meow.el"))
-  (load-conf-file config))
+  (my/load-conf-file config))
 
 (if (string-match "darwin" (emacs-version))
-    (load-conf-file "lex.el"))
+    (my/load-conf-file "lex.el"))
 
 (add-to-list 'auto-mode-alist
              '("\\.json\\'" . (lambda ()

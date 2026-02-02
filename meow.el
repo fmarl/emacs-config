@@ -58,6 +58,8 @@
    ;; Lines
    '("e" . meow-next-word)
    '("E" . forward-word)
+   '("x" . meow-line)
+   '("X" . meow-line-expand)
 
    ;; Selection
    '("v" . meow-block)
