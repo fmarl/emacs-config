@@ -1,3 +1,5 @@
+ ;;; config-completion.el --- Completion-frontend config -*- lexical-binding: t; -*-
+
 (use-package corfu
   :init (global-corfu-mode)
   :custom
@@ -16,3 +18,5 @@
   :config (yas-global-mode 1))
 
 (use-package yasnippet-snippets :after yasnippet)
+
+(provide 'config-completion)

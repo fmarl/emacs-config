@@ -1,7 +1,7 @@
 ;;; lang-python.el --- Python development setup -*- lexical-binding: t; -*-
 
 (use-package python
-  :ensure t
+  :ensure nil
   :hook ((python-mode . eglot-ensure)
 	 (python-mode . (lambda ()
                           (setq tab-width 4)
@@ -14,11 +14,6 @@
     (blacken-allow-py36 t)
     (blacken-line-length 88)))
 
-;; Linting with ruff
-(use-package flycheck
-  :hook (python-mode . flycheck-mode)
-  :config
-  (setq flycheck-python-pycompile-executable "python3")
-  (setq flycheck-python-flake8-executable "ruff"))
+;; Note: Using Flymake from Eglot, not Flycheck to avoid conflicts
 
 (provide 'lang-python)

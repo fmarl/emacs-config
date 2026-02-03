@@ -1,5 +1,6 @@
+ ;;; config-elfeed.el --- My RSS reader config -*- lexical-binding: t; -*-
+
 (use-package elfeed
-  :ensure t
   :config
   (setq elfeed-feeds
 	'(("https://feeds.arstechnica.com/arstechnica/technology-lab" news security)
@@ -36,3 +37,5 @@
 	  ("https://fareedfauzi.github.io/feed" vuln)
 	  ("https://seclists.org/rss/oss-sec.rss" mail)
 	  ("https://seclists.org/rss/fulldisclosure.rss" mail))))
+
+(provide 'config-elfeed)

@@ -34,7 +34,6 @@
 
 (use-package org-modern
   :after org
-  :ensure t
   :hook (org-mode . org-modern-mode)
   :config
   (setq org-modern-star '("◉" "○" "●" "◆" "◇" "▶")
@@ -47,12 +46,11 @@
           ("CANCELLED" . (:foreground "#5E81AC" :weight normal)))))
 
 (use-package denote
-  :ensure t
   :hook (dired-mode . denote-dired-mode)
   :bind
   (("C-c n n" . denote)
    ("C-c n r" . denote-rename-file)
-   ("C-c n l" . denote-link)
+   ("C-c n k" . denote-link)
    ("C-c n b" . denote-backlinks)
    ("C-c n d" . denote-dired)
    ("C-c n g" . denote-grep))
@@ -61,7 +59,6 @@
   (denote-rename-buffer-mode 1))
 
 (use-package org-roam
-  :ensure t
   :custom
   (org-roam-directory (file-truename "~/Org/roam/"))
   (org-roam-completion-everywhere t)
@@ -84,5 +81,4 @@
     (insert (format "#+TITLE: %s\n\n* TODO \n" (format-time-string "%A, %d %B %Y")))))
 
 
-(provide 'org)
-;;; org.el ends here
+(provide 'config-org)

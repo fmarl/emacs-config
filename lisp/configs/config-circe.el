@@ -1,5 +1,6 @@
+;;; config-circe.el --- My IRC client configuration -*- lexical-binding: t; -*-
+
 (use-package circe
-  :ensure t
   :config
   (setq circe-default-realname "fmarl"
 	circe-default-nick "fmarl"
@@ -18,3 +19,5 @@
 	   :host "alicorn.furnet.org"
 	   :port (6667 . 6697)
 	   :channels ("#pool")))))
+
+(provide 'config-circe)

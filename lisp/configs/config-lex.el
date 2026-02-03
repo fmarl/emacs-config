@@ -1,3 +1,5 @@
+;;; config-lex.el --- Work-related config -*- lexical-binding: t; -*-
+
 ;; Let Emacs see nix-darwin executables
 (let* ((user (getenv "USER"))
        (nix-path (concat "/etc/profiles/per-user/" user "/bin")))
@@ -34,19 +36,18 @@
   (find-file-other-window (expand-file-name "~/.git-shepherd")))
 
 (use-package worktime
-  :load-path "~/.emacs.d/lisp/worktime/"
+  :load-path "lisp/worktime/"
   :config (worktime-mode))
 
-(use-package inheritenv
-  :ensure t)
+(use-package inheritenv)
 
-(use-package vterm
-  :ensure t)
+(use-package vterm)
 
 (use-package claude-code
-  :ensure t
   :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
   :bind-keymap ("C-x c" . claude-code-command-map)
   :config
   (claude-code-mode)
   (setq claude-code-terminal-backend 'vterm))
+
+(provide 'config-lex)

@@ -39,17 +39,31 @@
       (user-error "No flake.nix found in project-root"))))
 
 (defun nixcmds--run (basecommand subcommand)
-  "Run nixcmds SUBCOMMAND using compile."
+  "Run nixcmds SUBCOMMAND using compile with password via SUDO_ASKPASS."
   (let* ((default-directory (nixcmds--flake-root))
-         (cmd (string-join
-			 (list
-			  (concat "echo " (shell-quote-argument (read-passwd "Password? ")) " | ")
-			  nixcmds-privilege-command
-			  basecommand
-			  subcommand
-			  "--flake .")
-			 " ")))
-    (compile cmd)))
+         (password (read-passwd "Password? "))
+         (askpass-script (make-temp-file "emacs-askpass-" nil ".sh"))
+         (cmd (format "%s %s %s --flake ."
+                      basecommand
+                      subcommand
+                      (if (string-prefix-p "sudo" nixcmds-privilege-command)
+                          "-A" ""))))
+    ;; Create temporary askpass script
+    (with-temp-file askpass-script
+      (insert "#!/bin/sh\n")
+      (insert (format "echo %s\n" (shell-quote-argument password))))
+    (set-file-modes askpass-script #o700)
+    ;; Set SUDO_ASKPASS and run command
+    (let ((process-environment
+           (cons (format "SUDO_ASKPASS=%s" askpass-script)
+                 process-environment)))
+      (compile (concat nixcmds-privilege-command cmd)))
+    ;; Clean up askpass script after a delay
+    (run-at-time 5 nil
+                 (lambda (file)
+                   (when (file-exists-p file)
+                     (delete-file file)))
+                 askpass-script)))
 
 ;;;###autoload
 (defun nixos-rebuild-switch ()
@@ -83,11 +97,11 @@
 
 (defvar nixcmds-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c n s") #'nixos-rebuild-switch)
-    (define-key map (kbd "C-c n t") #'nixos-rebuild-test)
-    (define-key map (kbd "C-c n b") #'nixos-rebuild-boot)
-    (define-key map (kbd "C-c n h") #'home-manager-switch)
-    (define-key map (kbd "C-c n d") #'darwin-rebuild-switch)
+    (define-key map (kbd "C-c x s") #'nixos-rebuild-switch)
+    (define-key map (kbd "C-c x t") #'nixos-rebuild-test)
+    (define-key map (kbd "C-c x b") #'nixos-rebuild-boot)
+    (define-key map (kbd "C-c x h") #'home-manager-switch)
+    (define-key map (kbd "C-c x d") #'darwin-rebuild-switch)
     map)
   "Keymap for `nixcmds-mode'.")
 

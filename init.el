@@ -12,13 +12,24 @@
       use-package-compute-statistics t
       custom-safe-themes t)
 
-(setq gc-cons-threshold (* 100 1024 1024)
-      read-process-output-max (* 1024 1024)
+;; Increase GC threshold during startup for better performance
+(setq gc-cons-threshold most-positive-fixnum)
+
+(setq read-process-output-max (* 1024 1024)
       inhibit-startup-screen t
       native-comp-async-report-warnings-errors nil)
 
+;; Reset GC threshold after startup
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 100 1024 1024))))
+
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
+
+;; GPG/EPG Configuration
+(require 'epg)
+(setq epg-pinentry-mode 'loopback)
 
 (tool-bar-mode -1)
 (menu-bar-mode -1)
@@ -31,13 +42,7 @@
 (set-cursor-color "#ffffff")
 (set-frame-font "Aporetic Sans Mono 12" nil t)
 (setq ring-bell-function 'ignore)
-
-;;; Security ----------------
 (setq enable-local-variables :safe)
-
-;;; -------------------------
-
-;;; Custom global keybinds --
 
 ;; Kill the last word instead of using backspace
 (global-set-key "\C-w" 'backward-kill-word)
@@ -48,7 +53,7 @@
 ;;; -------------------------
 
 ;; Backup und Auto-Save
-(setq backup-directory-alist '((".*" . "~/.saves/"))
+(setq backup-directory-alist `((".*" . ,(expand-file-name "backups/" user-emacs-directory)))
       auto-save-default nil)
 
 ;; Theme
@@ -85,12 +90,6 @@
 	 ("M-g -" . avy-kill-region)
 	 ("M-g =" . avy-move-region)
 	 ("M-g +" . avy-copy-region)))
-
-;; Smex (M-x)
-(use-package smex
-  :init (smex-initialize)
-  :bind (("M-x" . smex)
-         ("M-X" . smex-major-mode-commands)))
 
 ;; Markdown
 (use-package markdown-mode :mode "\\.md\\'")
@@ -159,65 +158,33 @@
   (define-prefix-command 'my/search-map)
   (global-set-key (kbd "M-f") 'my/search-map)
   (advice-add #'register-preview :override #'consult-register-window)
-  (setq register-preview-delay 0.5)
-  (setq xref-show-xrefs-function #'consult-xref
+  (setq register-preview-delay 0.5
+        xref-show-xrefs-function #'consult-xref
         xref-show-definitions-function #'consult-xref)
 
   :config
-  (setq consult-narrow-key "<") ;; "C-+"
-  (setq consult-ripgrep-command
-	"rg --null --line-buffered --color=never --max-columns=1000 --path-separator --smart-case --no-heading --with-filename --line-number --search-zip --hidden --glob '!.git/*' --glob '!.direnv/*'")
-  )
-
-(use-package marginalia
-  :init (marginalia-mode))
-
-(use-package orderless
-  :init
-  (setq completion-styles '(orderless)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles orderless)))))
+  (setq consult-narrow-key "<"
+        consult-ripgrep-command "rg --null --line-buffered --color=never --max-columns=1000 --path-separator --smart-case --no-heading --with-filename --line-number --search-zip --hidden --glob '!.git/*' --glob '!.direnv/*'"))
 
 (use-package vertico
   :init (vertico-mode))
 
-;; Custom functions
-(defun my/load-conf-file (file)
-  (interactive "f")
-  (load-file (concat (concat (getenv "HOME") "/.emacs.d/") file)))
+;; Use js-json-mode for JSON files (built-in, no auto-formatting)
+(add-to-list 'auto-mode-alist '("\\.json\\'" . js-json-mode))
 
-(my/load-conf-file "my.el")
+;; Add langs and configs to modules to load path
+(add-to-list 'load-path (expand-file-name "lisp/langs/" user-emacs-directory))
+(add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
 
-(dolist (config '("completion.el" "eglot.el" "org.el" "circe.el" "magit.el" "mu4e.el" "elfeed.el" "meow.el"))
-  (my/load-conf-file config))
+(dolist (config '("my" "completion" "eglot" "org" "circe" "magit" "mu4e" "elfeed" "meow"))
+  (require (intern (concat "config-" config))))
 
-(if (string-match "darwin" (emacs-version))
-    (my/load-conf-file "lex.el"))
+(when (string-match "darwin" (emacs-version))
+  (require (intern "config-lex")))
 
-(add-to-list 'auto-mode-alist
-             '("\\.json\\'" . (lambda ()
-                                (javascript-mode)
-                                (json-pretty-print (point-min) (point-max))
-                                (goto-char (point-min))
-                                (set-buffer-modified-p nil))))
-
-(require 'epg)
-(setq epg-pinentry-mode 'loopback)
-
-(add-to-list 'load-path "~/.emacs.d/lisp/langs/")
+;; Keep custom settings in separate file
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
 
 (provide 'init)
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages nil)
- '(package-vc-selected-packages
-   '((claude-code :url "https://github.com/stevemolitor/claude-code.el"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )

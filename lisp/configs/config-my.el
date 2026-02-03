@@ -1,3 +1,5 @@
+;;; config-my.el --- Some custom functions -*- lexical-binding: t; -*-
+
 (defun my/enable-lang (lang)
   (interactive "sLang: ")
   (progn
@@ -6,8 +8,8 @@
 
 (defun my/update-config ()
   (interactive)
-  (let ((config-dir (expand-file-name "~/.emacs.d/"))
-	(init-file (expand-file-name "~/.emacs.d/init.el"))
+  (let ((config-dir user-emacs-directory)
+	(init-file (expand-file-name "init.el" user-emacs-directory))
 	(buffer (get-buffer-create "*git*")))
     (progn
       (start-process
@@ -17,3 +19,5 @@
        "pull"
        config-dir)
       (load-file init-file))))
+
+(provide 'config-my)

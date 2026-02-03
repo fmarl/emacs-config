@@ -1,3 +1,5 @@
+ ;;; config-magit.el --- Magit related config -*- lexical-binding: t; -*-
+
 (use-package magit
   :commands (magit-status magit-get-current-branch)
   :bind (("C-x g" . magit-status))
@@ -31,3 +33,5 @@
           (insert (format "* Hotfix in %s\n" repo-name))
           (insert (format "Diff:\n#+BEGIN_SRC diff\n%s\n#+END_SRC\n\n" diff))
           (write-region (point-min) (point-max) org-file))))))
+
+(provide 'config-magit)

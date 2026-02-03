@@ -1,3 +1,5 @@
+;;; config-meow.el --- Meow editing config -*- lexical-binding: t; -*-
+
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
   (add-to-list 'meow-mode-state-list
@@ -19,7 +21,6 @@
    ;; spc j/k will run the original command in motion state.
    '("j" . "h-j")
    '("k" . "h-k")
-   '("/" . "h-/")
    '("r" . consult-ripgrep)
    '("f" . find-file)
    '("b" . consult-buffer)
@@ -35,7 +36,6 @@
    '("8" . meow-digit-argument)
    '("9" . meow-digit-argument)
    '("0" . meow-digit-argument)
-   '("/" . meow-keypad-describe-key)
    '("?" . meow-cheatsheet))
   
   (meow-normal-define-key
@@ -56,8 +56,6 @@
    '("B" . backward-word)
 
    ;; Lines
-   '("e" . meow-next-word)
-   '("E" . forward-word)
    '("x" . meow-line)
    '("X" . meow-line-expand)
 
@@ -112,29 +110,23 @@
    '("a" . meow-append)
    '("D" . meow-backward-delete)
    '("g" . meow-join)
-   ;; '("G" . meow-grab)
-   ;; '("I" . meow-open-above)
    '("n" . meow-search)
    '("q" . meow-quit)
    '("Q" . meow-goto-line)
    '("R" . meow-swap-grab)
    '("s" . meow-grab)
-   ;; '("s" . meow-kill)
    '("t" . meow-till)
-   ;;'("U" . meow-undo-in-selection)
    '("?" . comment-dwim)
-   '("y" . meow-save)
    '("Y" . meow-sync-grab)
    '("z" . meow-pop-selection)
    '("'" . repeat)
    '("<escape>" . meow-cancel-selection)
    '("%" . meow-query-replace)
-   '("&" . meow-query-replace-regexp)
-   ))
+   '("&" . meow-query-replace-regexp)))
 
 (use-package meow
-  :ensure t
   :config
   (meow-setup)
-  (meow-global-mode 1)
-  )
+  (meow-global-mode 1))
+
+(provide 'config-meow)

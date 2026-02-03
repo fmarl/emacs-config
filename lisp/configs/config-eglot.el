@@ -1,7 +1,6 @@
-;; -*- lexical-binding: t; -*-
+;;; config-eglot.el --- Eglot configuration -*- lexical-binding: t; -*-
 
 (use-package eglot
-  :ensure t
   :config
   (setq eglot-sync-connect nil
         eglot-autoshutdown t
@@ -22,3 +21,5 @@
               ("C-c M-?" . consult-eglot-symbols)
               ("C-c a" . eglot-code-actions)
               ("C-c r" . eglot-rename)))
+
+(provide 'config-eglot)
