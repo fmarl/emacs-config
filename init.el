@@ -43,6 +43,8 @@
 (set-frame-font "Aporetic Sans Mono 12" nil t)
 (setq ring-bell-function 'ignore)
 (setq enable-local-variables :safe)
+(setq native-comp-deferred-compilation t)
+(setq load-prefer-newer t)  
 
 ;; Kill the last word instead of using backspace
 (global-set-key "\C-w" 'backward-kill-word)
