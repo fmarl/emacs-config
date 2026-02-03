@@ -6,11 +6,6 @@
                '(magit-mode . motion))
   (add-to-list 'meow-mode-state-list
                '(magit-status-mode . motion))
-  (meow-motion-overwrite-define-key
-   '("j" . meow-next)
-   '("k" . meow-prev)
-   '("/" . consult-line)
-   )
   (setq meow-selection-command-fallback
         '((meow-change . meow-change-char)
           (meow-kill . meow-delete)

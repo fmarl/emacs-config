@@ -74,7 +74,7 @@
 
 (defun my/org-new-dated-file ()
   "Create a new org-mode buffer with the current date as name."
-    (interactive)
+  (interactive)
   (let ((buffer-name (format "%s.org" (format-time-string "%Y-%m-%d"))))
     (switch-to-buffer (get-buffer-create buffer-name))
     (org-mode)
