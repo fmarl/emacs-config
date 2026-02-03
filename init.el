@@ -46,14 +46,6 @@
 (setq native-comp-deferred-compilation t)
 (setq load-prefer-newer t)  
 
-;; Kill the last word instead of using backspace
-(global-set-key "\C-w" 'backward-kill-word)
-(global-set-key "\C-x\C-k" 'kill-region)
-(global-set-key "\C-c\C-sl" 'scroll-lock-mode)
-(global-set-key "\C-c\C-sa" 'scroll-all-mode)
-
-;;; -------------------------
-
 ;; Backup und Auto-Save
 (setq backup-directory-alist `((".*" . ,(expand-file-name "backups/" user-emacs-directory)))
       auto-save-default nil)

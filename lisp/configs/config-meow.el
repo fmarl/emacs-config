@@ -2,25 +2,19 @@
 
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
-  (add-to-list 'meow-mode-state-list
-               '(magit-mode . motion))
-  (add-to-list 'meow-mode-state-list
-               '(magit-status-mode . motion))
+
   (setq meow-selection-command-fallback
         '((meow-change . meow-change-char)
           (meow-kill . meow-delete)
           (meow-cancel-selection . ignore)
           (meow-pop-selection . meow-pop-grab)
           (meow-beacon-change . meow-beacon-change-char)))
+
   (meow-leader-define-key
-   ;; spc j/k will run the original command in motion state.
-   '("j" . "h-j")
-   '("k" . "h-k")
    '("r" . consult-ripgrep)
    '("f" . find-file)
    '("b" . consult-buffer)
    '("u" . magit-status-quick)
-   ;; use spc (0-9) for digit arguments.
    '("1" . meow-digit-argument)
    '("2" . meow-digit-argument)
    '("3" . meow-digit-argument)
