@@ -39,15 +39,4 @@
   :load-path "lisp/worktime/"
   :config (worktime-mode))
 
-(use-package inheritenv)
-
-(use-package vterm)
-
-(use-package claude-code
-  :vc (:url "https://github.com/stevemolitor/claude-code.el" :rev :newest)
-  :bind-keymap ("C-x c" . claude-code-command-map)
-  :config
-  (claude-code-mode)
-  (setq claude-code-terminal-backend 'vterm))
-
 (provide 'config-lex)

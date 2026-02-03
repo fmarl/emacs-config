@@ -1,6 +1,9 @@
 # Compiled
 *.elc
 
+# Custom variables
+custom.el
+
 # Packaging
 .cask/
 .eask/
