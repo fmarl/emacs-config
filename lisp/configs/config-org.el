@@ -1,4 +1,4 @@
-;;; org.el --- Modern Org-Mode Configuration -*- lexical-binding: t; -*-
+;;; config-org.el --- Modern Org-Mode Configuration -*- lexical-binding: t; -*-
 
 (require 'org)
 

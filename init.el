@@ -166,6 +166,15 @@
   (setq consult-narrow-key "<"
         consult-ripgrep-command "rg --null --line-buffered --color=never --max-columns=1000 --path-separator --smart-case --no-heading --with-filename --line-number --search-zip --hidden --glob '!.git/*' --glob '!.direnv/*'"))
 
+(use-package marginalia
+  :init (marginalia-mode))
+
+(use-package orderless
+  :init
+  (setq completion-styles '(orderless)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles orderless)))))
+
 (use-package vertico
   :init (vertico-mode))
 
@@ -176,8 +185,7 @@
 (add-to-list 'load-path (expand-file-name "lisp/langs/" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
 
-(dolist (config '("my" "completion" "eglot" "org" "circe" "magit" "mu4e" "elfeed" "meow"))
-  (require (intern (concat "config-" config))))
+(mapc #'require '(config-my config-completion config-eglot config-org config-circe config-magit config-mu4e config-elfeed config-meow))
 
 (when (string-match "darwin" (emacs-version))
   (require (intern "config-lex")))
