@@ -40,7 +40,7 @@
 (electric-pair-mode 1)
 (global-prettify-symbols-mode 1)
 (set-cursor-color "#ffffff")
-(set-frame-font "Aporetic Sans Mono 12" nil t)
+(add-to-list 'default-frame-alist '(font . "Aporetic Sans Mono 12"))
 (setq ring-bell-function 'ignore)
 (setq enable-local-variables :safe)
 (setq native-comp-deferred-compilation t)
