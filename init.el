@@ -88,6 +88,10 @@
 ;; Markdown
 (use-package markdown-mode :mode "\\.md\\'")
 
+;; Paredit
+(use-package paredit
+  :hook ((emacs-lisp-mode) . paredit-mode))
+
 ;; Direnv
 (use-package direnv
   :config (direnv-mode))
