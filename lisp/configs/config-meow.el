@@ -3,6 +3,8 @@
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
 
+  (add-to-list 'meow-mode-state-list '((circe-mode . insert)))
+  
   (setq meow-selection-command-fallback
         '((meow-change . meow-change-char)
           (meow-kill . meow-delete)
