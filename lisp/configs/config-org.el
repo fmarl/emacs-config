@@ -72,13 +72,4 @@
 (global-set-key (kbd "C-c c") 'org-capture)
 (global-set-key (kbd "C-c l") 'org-store-link)
 
-(defun my/org-new-dated-file ()
-  "Create a new org-mode buffer with the current date as name."
-  (interactive)
-  (let ((buffer-name (format "%s.org" (format-time-string "%Y-%m-%d"))))
-    (switch-to-buffer (get-buffer-create buffer-name))
-    (org-mode)
-    (insert (format "#+TITLE: %s\n\n* TODO \n" (format-time-string "%A, %d %B %Y")))))
-
-
 (provide 'config-org)
