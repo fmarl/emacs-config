@@ -23,9 +23,6 @@
 	org-log-done 'time
 	org-log-into-drawer t
 	org-return-follows-link t)
-
-  ;; Verb
-  (define-key org-mode-map (kbd "C-c C-r") verb-command-map)
   
   ;; Todo keywords
   (setq org-todo-keywords
