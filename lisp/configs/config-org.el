@@ -21,7 +21,6 @@
 	org-log-done 'time
 	org-log-into-drawer t
 	org-return-follows-link t)
-
   ;; Todo keywords
   (setq org-todo-keywords
         '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)" "CANCELLED(c)"))))
