@@ -13,7 +13,9 @@
 (setq mac-option-modifier 'meta)
 
 ;; Terraform
-(use-package terraform-mode :mode "\\.tf\\'")
+(use-package terraform-mode
+  :mode "\\.tf\\'"
+  :hook (terraform-mode . eglot-ensure))
 
 ;; YAML
 (use-package yaml-mode :mode (("\\.yml\\'" . yaml-mode)

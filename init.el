@@ -55,6 +55,10 @@
 
 (setq backup-enable-predicate #'my/backup-enable-p)
 
+(savehist-mode 1)
+(recentf-mode 1)
+(save-place-mode 1)
+
 ;; Theme
 (use-package ef-themes
   :init
@@ -97,9 +101,12 @@
 (use-package paredit
   :hook ((emacs-lisp-mode) . paredit-mode))
 
-;; Direnv
-(use-package direnv
-  :config (direnv-mode))
+;; Format-on-save (black, terraform fmt, nixfmt, ...)
+(use-package apheleia
+  :init (apheleia-global-mode 1)
+  :config
+  ;; apheleia defaults terraform-mode to opentofu
+  (setf (alist-get 'terraform-mode apheleia-mode-alist) 'terraform))
 
 (use-package consult
   :bind (;; C-c bindings in `mode-specific-map'
@@ -184,6 +191,18 @@
 (use-package vertico
   :init (vertico-mode))
 
+(use-package embark
+  :bind (("C-." . embark-act)
+	 ("C-h B" . embark-bindings))
+  :init
+  (setq prefix-help-command #'embark-prefix-help-command))
+
+(use-package embark-consult
+  :after (embark consult)
+  :hook (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package wgrep)
+
 ;; Use js-json-mode for JSON files (built-in, no auto-formatting)
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js-json-mode))
 
@@ -195,6 +214,10 @@
 
 (when (eq system-type 'darwin)
   (require 'config-lex))
+
+;; envrc needs to be enabled late in init
+(use-package envrc
+  :config (envrc-global-mode 1))
 
 ;; Keep custom settings in separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))

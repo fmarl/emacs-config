@@ -1,10 +1,14 @@
 ;;; config-my.el --- Some custom functions -*- lexical-binding: t; -*-
 
 (defun my/enable-lang (lang)
-  (interactive "sLang: ")
-  (progn
-    (require (intern (concat "lang-" lang)))
-    (revert-buffer-quick)))
+  (interactive
+   (list (completing-read
+	  "Lang: "
+	  (mapcar (lambda (file) (substring (file-name-base file) 5))
+		  (directory-files (expand-file-name "lisp/langs/" user-emacs-directory)
+				   nil "\\`lang-.*\\.el\\'")))))
+  (require (intern (concat "lang-" lang)))
+  (revert-buffer-quick))
 
 (defun my/update-config ()
   (interactive)

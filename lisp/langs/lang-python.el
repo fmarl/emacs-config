@@ -7,14 +7,7 @@
   :hook ((python-base-mode . eglot-ensure)
 	 (python-base-mode . (lambda ()
                                (setq tab-width 4)
-                               (setq python-indent-offset 4))))
-  :config
-  ;; Autoformat using black on save
-  (use-package blacken
-    :hook (python-base-mode . blacken-mode)
-    :custom
-    (blacken-allow-py36 t)
-    (blacken-line-length 88)))
+                               (setq python-indent-offset 4)))))
 
 ;; Note: Using Flymake from Eglot, not Flycheck to avoid conflicts
 
