@@ -5,12 +5,7 @@
   (setq eglot-sync-connect nil
         eglot-autoshutdown t
         eglot-extend-to-xref t
-	eglot-code-action-indicator "*>")
-  	       
-  (add-hook 'eglot-managed-mode-hook
-            (lambda ()
-              (flymake-mode 1)
-              (eldoc-mode 1))))
+	eglot-code-action-indicator "*>"))
 
 (use-package consult-eglot
   :after (consult eglot)

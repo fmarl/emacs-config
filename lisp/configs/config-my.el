@@ -8,16 +8,14 @@
 
 (defun my/update-config ()
   (interactive)
-  (let ((config-dir user-emacs-directory)
-	(init-file (expand-file-name "init.el" user-emacs-directory))
+  (let ((init-file (expand-file-name "init.el" user-emacs-directory))
 	(buffer (get-buffer-create "*git*")))
-    (progn
-      (start-process
-       "git"
-       buffer
-       "git"
-       "pull"
-       config-dir)
-      (load-file init-file))))
+    (set-process-sentinel
+     (start-process "git" buffer "git" "-C" user-emacs-directory "pull")
+     (lambda (_proc event)
+       (if (string= event "finished\n")
+	   (load-file init-file)
+	 (message "my/update-config: git pull failed (%s), see %s"
+		  (string-trim event) (buffer-name buffer)))))))
 
 (provide 'config-my)

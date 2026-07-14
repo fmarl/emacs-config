@@ -43,12 +43,17 @@
 (add-to-list 'default-frame-alist '(font . "Aporetic Sans Mono 14"))
 (setq ring-bell-function 'ignore)
 (setq enable-local-variables :safe)
-(setq native-comp-deferred-compilation t)
-(setq load-prefer-newer t)  
+(setq load-prefer-newer t)
 
 ;; Backup und Auto-Save
-(setq backup-directory-alist `((".*" . ,(expand-file-name "backups/" user-emacs-directory)))
+(setq backup-directory-alist '((".*" . "~/.cache/emacs/backups/"))
       auto-save-default nil)
+
+(defun my/backup-enable-p (name)
+  (and (normal-backup-enable-predicate name)
+       (not (string-match-p "/\\.\\(aws\\|ssh\\|gnupg\\)/\\|/secrets/\\|\\.env\\(\\.[^/]*\\)?\\'" name))))
+
+(setq backup-enable-predicate #'my/backup-enable-p)
 
 ;; Theme
 (use-package ef-themes
@@ -162,7 +167,10 @@
 
   :config
   (setq consult-narrow-key "<"
-        consult-ripgrep-command "rg --null --line-buffered --color=never --max-columns=1000 --path-separator --smart-case --no-heading --with-filename --line-number --search-zip --hidden --glob '!.git/*' --glob '!.direnv/*'"))
+        consult-ripgrep-args
+        "rg --null --line-buffered --color=never --max-columns=1000 --path-separator /\
+ --smart-case --no-heading --with-filename --line-number --search-zip\
+ --hidden --glob !.git/* --glob !.direnv/*"))
 
 (use-package marginalia
   :init (marginalia-mode))
@@ -185,8 +193,8 @@
 
 (mapc #'require '(config-my config-completion config-eglot config-org config-circe config-magit config-mu4e config-elfeed config-meow))
 
-(when (string-match "darwin" (emacs-version))
-  (require (intern "config-lex")))
+(when (eq system-type 'darwin)
+  (require 'config-lex))
 
 ;; Keep custom settings in separate file
 (setq custom-file (expand-file-name "custom.el" user-emacs-directory))

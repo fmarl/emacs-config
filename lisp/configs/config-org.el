@@ -1,7 +1,5 @@
 ;;; config-org.el --- Modern Org-Mode Configuration -*- lexical-binding: t; -*-
 
-(require 'org)
-
 ;; Basic Org Setup
 (use-package org
   :ensure nil
@@ -24,9 +22,6 @@
 	org-log-into-drawer t
 	org-return-follows-link t)
 
-  ;; Verb
-  (define-key org-mode-map (kbd "C-c C-r") verb-command-map)
-  
   ;; Todo keywords
   (setq org-todo-keywords
         '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)" "CANCELLED(c)"))))
@@ -57,16 +52,6 @@
   :config
   (setq denote-directory (expand-file-name "~/Org/denote/"))
   (denote-rename-buffer-mode 1))
-
-(use-package org-roam
-  :custom
-  (org-roam-directory (file-truename "~/Org/roam/"))
-  (org-roam-completion-everywhere t)
-  :bind (("C-c n l" . org-roam-buffer-toggle)
-         ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert))
-  :config
-  (org-roam-db-autosync-mode))
 
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
