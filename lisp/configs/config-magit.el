@@ -15,9 +15,10 @@
 
 (defun my/magit/add-jira-issue-to-commit-msg ()
   "Extract a Jira Issue Key from the current branch and insert it into the commit msg."
-  (let ((jira-issue (my/magit/extract-jira-issue-from-branch)))
-    (when jira-issue
-      (insert (format "%s " jira-issue)))))
+  (unless (my/kernel-tree-p)
+    (let ((jira-issue (my/magit/extract-jira-issue-from-branch)))
+      (when jira-issue
+        (insert (format "%s " jira-issue))))))
 
 (defun my/magit/hotfix-log-to-org ()
   "If the new commit contains the word 'Hotfix:', log it's content to a .org file."

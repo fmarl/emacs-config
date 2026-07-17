@@ -106,7 +106,9 @@
   :init (apheleia-global-mode 1)
   :config
   ;; apheleia defaults terraform-mode to opentofu
-  (setf (alist-get 'terraform-mode apheleia-mode-alist) 'terraform))
+  (setf (alist-get 'terraform-mode apheleia-mode-alist) 'terraform)
+  (add-to-list 'apheleia-inhibit-functions
+	       (lambda () (and buffer-file-name (my/kernel-tree-p buffer-file-name)))))
 
 (use-package consult
   :bind (;; C-c bindings in `mode-specific-map'
