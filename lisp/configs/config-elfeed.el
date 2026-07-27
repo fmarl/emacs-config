@@ -1,6 +1,7 @@
  ;;; config-elfeed.el --- My RSS reader config -*- lexical-binding: t; -*-
 
 (use-package elfeed
+  :defer t
   :config
   (setq elfeed-feeds
         '(("https://feeds.arstechnica.com/arstechnica/technology-lab" news)
@@ -28,7 +29,7 @@
           ("https://blog.isosceles.com/rss/" redteam research)
           ("https://connormcgarr.github.io/feed.xml" redteam research)
           ("https://blog.pi3.com.pl/?feed=rss2" redteam research)
-	  ("http://www.icewall.pl/?feed=rss2" redteam research)
+	  ("https://www.icewall.pl/?feed=rss2" redteam research)
 	  ("https://tyranidslair.blogspot.com/feeds/posts/default" redteam research)
           ("https://www.matteomalvica.com/index.xml" redteam research)
           ("https://blog.badsectorlabs.com/feeds/all.atom.xml" malware research)
@@ -46,10 +47,10 @@
           ("https://www.vusec.net/feed/" redteam research)
 	  ("https://jmpesp.me/rss/" binsec research)
 	  ("https://blog.trailofbits.com/feed/" research)
-	  ("http://tsyrklevich.net/feed.xml" research reverse)
-	  ("http://blog.rewolf.pl/blog/?feed=rss2" research reverse)
-	  ("http://x9090.blogspot.com/feeds/posts/default" research reverse binsec)
-	  ("http://addxorrol.blogspot.com/feeds/posts/default" binsec research)
+	  ("https://tsyrklevich.net/feed.xml" research reverse)
+	  ("https://blog.rewolf.pl/blog/?feed=rss2" research reverse)
+	  ("https://x9090.blogspot.com/feeds/posts/default" research reverse binsec)
+	  ("https://addxorrol.blogspot.com/feeds/posts/default" binsec research)
 	  ("https://adamdoupe.com/atom.xml" research websec binsec))))
 
 (provide 'config-elfeed)

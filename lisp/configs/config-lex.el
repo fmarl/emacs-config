@@ -7,7 +7,6 @@
   (setenv "PATH" (concat nix-path ":" (getenv "PATH"))))
 
 ;; Some MacOS compatibility stuff
-(setq ring-bell-function 'ignore)
 (setq mac-command-modifier 'control)
 (setq mac-control-modifier 'super)
 (setq mac-option-modifier 'meta)

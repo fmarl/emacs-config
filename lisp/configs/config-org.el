@@ -1,6 +1,5 @@
 ;;; config-org.el --- Modern Org-Mode Configuration -*- lexical-binding: t; -*-
 
-;; Basic Org Setup
 (use-package org
   :ensure nil
   :hook ((org-mode . visual-line-mode)
@@ -9,7 +8,6 @@
          (org-mode . (lambda ()
                        (setq line-spacing 0.2)
                        (display-line-numbers-mode 0))))
-  :mode ("\\.org\\'" . org-mode)
   :config
   (setq org-hide-emphasis-markers t
 	org-pretty-entities t
@@ -21,7 +19,6 @@
 	org-log-done 'time
 	org-log-into-drawer t
 	org-return-follows-link t)
-  ;; Todo keywords
   (setq org-todo-keywords
         '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)" "CANCELLED(c)"))))
 

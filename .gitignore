@@ -28,6 +28,9 @@ transient/
 eshell/
 
 # Generated files
+history
+places
+recentf
 *.eld
 smex-items
 tramp

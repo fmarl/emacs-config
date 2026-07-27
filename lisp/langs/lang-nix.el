@@ -5,7 +5,7 @@
   :group 'tools
   :prefix "nixcmds-")
 
-(defcustom nixcmds-privilege-command "sudo -S "
+(defcustom nixcmds-privilege-command "sudo "
   "Command used to gain root privileges (e.g. sudo or doas)."
   :type 'string
   :group 'nixcmds)
@@ -29,7 +29,7 @@
   "Return project root directory or signal an error."
   (or (when-let ((proj (project-current)))
         (project-root proj))
-      (user-error "No projekt-root found (project.el)")))
+      (user-error "No project root found (project.el)")))
 
 (defun nixcmds--flake-root ()
   "Return directory containing flake.nix."
@@ -39,31 +39,12 @@
       (user-error "No flake.nix found in project-root"))))
 
 (defun nixcmds--run (basecommand subcommand)
-  "Run nixcmds SUBCOMMAND using compile with password via SUDO_ASKPASS."
-  (let* ((default-directory (nixcmds--flake-root))
-         (password (read-passwd "Password? "))
-         (askpass-script (make-temp-file "emacs-askpass-" nil ".sh"))
-         (cmd (format "%s %s %s --flake ."
-                      basecommand
-                      subcommand
-                      (if (string-prefix-p "sudo" nixcmds-privilege-command)
-                          "-A" ""))))
-    ;; Create temporary askpass script
-    (with-temp-file askpass-script
-      (insert "#!/bin/sh\n")
-      (insert (format "echo %s\n" (shell-quote-argument password))))
-    (set-file-modes askpass-script #o700)
-    ;; Set SUDO_ASKPASS and run command
-    (let ((process-environment
-           (cons (format "SUDO_ASKPASS=%s" askpass-script)
-                 process-environment)))
-      (compile (concat nixcmds-privilege-command cmd)))
-    ;; Clean up askpass script after a delay
-    (run-at-time 5 nil
-                 (lambda (file)
-                   (when (file-exists-p file)
-                     (delete-file file)))
-                 askpass-script)))
+  "Run BASECOMMAND SUBCOMMAND in an interactive compile buffer.
+Comint handles the sudo password prompt, so it never touches disk."
+  (let ((default-directory (nixcmds--flake-root)))
+    (compile (format "%s%s %s --flake ."
+		     nixcmds-privilege-command basecommand subcommand)
+	     t)))
 
 ;;;###autoload
 (defun nixos-rebuild-switch ()
@@ -112,7 +93,6 @@
   :keymap nixcmds-mode-map)
 
 (use-package nix-ts-mode
-  :init (setq treesit-font-lock-level 4)
   :hook (nix-ts-mode . nixcmds-mode)
   :mode "\\.nix\\'")
 

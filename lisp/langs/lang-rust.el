@@ -8,7 +8,6 @@
   :after (rust-mode)
   :init
   (setq rustic-lsp-server 'rust-analyzer
-        rustic-format-on-save t
         rustic-lsp-client 'eglot)
   :hook
   (rustic-mode . eglot-ensure))

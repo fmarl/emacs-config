@@ -1,6 +1,7 @@
 ;;; config-circe.el --- My IRC client configuration -*- lexical-binding: t; -*-
 
 (use-package circe
+  :defer t
   :config
   (setq circe-default-realname "fmarl"
 	circe-default-nick "fmarl"

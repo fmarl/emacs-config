@@ -13,17 +13,17 @@
   :group 'tools
   :prefix "worktime-")
 
-(defcustom hours-per-week 40
+(defcustom worktime-hours-per-week 40
   "How many hours per week you need to work"
   :type 'integer
   :group 'worktime)
 
-(defcustom days-per-week 5
+(defcustom worktime-days-per-week 5
   "How many days do you need to work"
   :type 'integer
   :group 'worktime)
 
-(defcustom break-per-day 30
+(defcustom worktime-break-per-day 30
   "How many minutes do you make break"
   :type 'integer
   :group 'worktime)
@@ -42,14 +42,14 @@
 	 (start-time (mod (+ (mod (+ (* hour 60) minute) minutes-per-day) minutes-per-day) minutes-per-day)))
     (progn
       (setq worktime--start-time start-time)
-      (worktime--add (/ hours-per-week days-per-week) 0)
+      (worktime--add (/ worktime-hours-per-week worktime-days-per-week) 0)
       (worktime--update))))
 
 (defun worktime--add (hours minutes)
   (let ((minutes-per-day (* 24 60)))
     (if (not (null worktime--start-time))
 	(setq worktime--end-time
-	      (mod (+ worktime--start-time (+ (* hours 60) minutes break-per-day)) minutes-per-day))
+	      (mod (+ worktime--start-time (+ (* hours 60) minutes worktime-break-per-day)) minutes-per-day))
       '())))
 
 (defun worktime--to-string (sign time)
