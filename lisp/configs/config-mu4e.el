@@ -69,7 +69,7 @@
     (let ((default-directory my/kernel-src-dir))
       (compile (format "b4 shazam %s"
 		       (shell-quote-argument (mu4e-message-field msg :message-id))))))
-  
+
   (add-to-list 'mu4e-view-actions '("b4 shazam series" . my/mu4e-b4-shazam) t))
 
 (provide 'config-mu4e)

@@ -28,15 +28,15 @@
          ("M-g k" . consult-global-mark)
          ("M-g i" . consult-imenu)
          ("M-g I" . consult-imenu-multi)
-         ("M-f d" . consult-find)
-         ("M-f c" . consult-locate)
-         ("M-f g" . consult-grep)
-         ("M-f G" . consult-git-grep)
-         ("M-f r" . consult-ripgrep)
-         ("M-f l" . consult-line)
-         ("M-f L" . consult-line-multi)
-         ("M-f k" . consult-keep-lines)
-         ("M-f u" . consult-focus-lines)
+         ("M-s d" . consult-find)
+         ("M-s c" . consult-locate)
+         ("M-s g" . consult-grep)
+         ("M-s G" . consult-git-grep)
+         ("M-s r" . consult-ripgrep)
+         ("M-s l" . consult-line)
+         ("M-s L" . consult-line-multi)
+         ("M-s k" . consult-keep-lines)
+         ("M-s u" . consult-focus-lines)
          ("M-s e" . consult-isearch-history)
          :map isearch-mode-map
          ("M-e" . consult-isearch-history)
@@ -50,8 +50,6 @@
 
   :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
-  (define-prefix-command 'my/search-map)
-  (global-set-key (kbd "M-f") 'my/search-map)
   (advice-add #'register-preview :override #'consult-register-window)
   (setq register-preview-delay 0.5
         xref-show-xrefs-function #'consult-xref

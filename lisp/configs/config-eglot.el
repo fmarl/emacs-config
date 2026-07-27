@@ -14,8 +14,8 @@
               ("M-." . xref-find-definitions)
               ("M-," . xref-go-back)
 	      ("M-?" . xref-find-references)
-              ("C-c M-?" . consult-eglot-symbols)
-              ("C-c a" . eglot-code-actions)
-              ("C-c r" . eglot-rename)))
+              ("C-c e s" . consult-eglot-symbols)
+              ("C-c e a" . eglot-code-actions)
+              ("C-c e r" . eglot-rename)))
 
 (provide 'config-eglot)

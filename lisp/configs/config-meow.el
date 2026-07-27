@@ -4,7 +4,7 @@
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
 
   (add-to-list 'meow-mode-state-list '(circe-mode . insert))
-  
+
   (setq meow-selection-command-fallback
         '((meow-change . meow-change-char)
           (meow-kill . meow-delete)
@@ -17,6 +17,7 @@
    '("f" . find-file)
    '("b" . consult-buffer)
    '("u" . magit-status-quick)
+   '("s" . "M-s")
    '("1" . meow-digit-argument)
    '("2" . meow-digit-argument)
    '("3" . meow-digit-argument)
@@ -28,7 +29,7 @@
    '("9" . meow-digit-argument)
    '("0" . meow-digit-argument)
    '("?" . meow-cheatsheet))
-  
+
   (meow-normal-define-key
    ;; Movements
    '("j" . meow-next)
@@ -78,7 +79,7 @@
    ;; Undo / Redo
    '("u" . meow-undo)
    '("U" . undo-redo)
-     
+
    ;; Expand
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)
@@ -96,7 +97,7 @@
    '("(" . meow-forward-barf)
    '("{" . meow-backward-slurp)
    '("}" . meow-backward-barf)
-   
+
    '("-" . negative-argument)
    '("a" . meow-append)
    '("D" . meow-backward-delete)

@@ -14,26 +14,23 @@
  ring-bell-function 'ignore
  enable-local-variables :safe
  load-prefer-newer t
- 
- ;; nix-ts-mode keeps its interesting features in level 4
- treesit-font-lock-level '((nix-ts-mode . 4) (t . 3))
  epg-pinentry-mode 'loopback
  network-security-level 'high
- 
+
  ;; strip User-Agent/OS/version info, reject cookies
  url-privacy-level 'paranoid
- 
+
  ;; never fetch remote images in shr buffers (elfeed, eww, HTML mail)
  shr-inhibit-images t
  backup-directory-alist '((".*" . "~/.cache/emacs/backups/"))
  backup-enable-predicate #'my/backup-enable-p
  auto-save-default nil
- 
+
  ;; keep runtime state in ~/.cache instead of the config repo
  savehist-file "~/.cache/emacs/history"
  save-place-file "~/.cache/emacs/places"
  recentf-save-file "~/.cache/emacs/recentf"
- 
+
  ;; both cleanups stat every entry, hanging on stale TRAMP paths
  recentf-auto-cleanup 'never
  save-place-forget-unreadable-files nil
