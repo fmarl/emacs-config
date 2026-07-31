@@ -12,7 +12,6 @@
  inhibit-startup-screen t
  native-comp-async-report-warnings-errors nil
  ring-bell-function 'ignore
- enable-local-variables :safe
  load-prefer-newer t
  epg-pinentry-mode 'loopback
  network-security-level 'high

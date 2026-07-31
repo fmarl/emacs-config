@@ -20,6 +20,17 @@
 (use-package yaml-mode :mode (("\\.yml\\'" . yaml-mode)
 			      ("\\.yaml\\'" . yaml-mode)))
 
+(defun my/run-finalize ()
+  (interactive)
+  (let* ((vuln (read-string "Vulnerable?: "))
+         (ignore (read-string "Ignore?: "))
+         (days (read-string "Days?: "))
+         (cmd (format "printf '%s\n%s\n%s\n' | %s/tools/finalize -file %s"
+                      vuln ignore days
+                      (projectile-project-root)
+                      (shell-quote-argument (buffer-file-name)))))
+    (compile cmd)))
+
 (defun run-git-shepherd ()
   "Run git-shepherd to sync local git repos"
   (interactive)
