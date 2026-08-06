@@ -42,16 +42,17 @@
 
 (add-hook 'after-change-major-mode-hook #'my/lang-auto-enable)
 
-(defun my/update-config ()
+(defun my/eshell-here ()
   (interactive)
-  (let ((init-file (expand-file-name "init.el" user-emacs-directory))
-	(buffer (get-buffer-create "*git*")))
-    (set-process-sentinel
-     (start-process "git" buffer "git" "-C" user-emacs-directory "pull")
-     (lambda (_proc event)
-       (if (string= event "finished\n")
-	   (load-file init-file)
-	 (message "my/update-config: git pull failed (%s), see %s"
-		  (string-trim event) (buffer-name buffer)))))))
+  (let* ((dir default-directory)
+	 (buf (get-buffer "*eshell*"))
+	 (win (and buf (get-buffer-window buf t))))
+    (if win
+	(select-window win)
+      (pop-to-buffer (or buf (save-window-excursion (eshell) (current-buffer)))
+                     '((display-buffer-reuse-window display-buffer-pop-up-window)
+                       (inhibit-same-window . t))))
+    (eshell/cd dir)
+    (eshell-next-prompt)))
 
 (provide 'config-my)
