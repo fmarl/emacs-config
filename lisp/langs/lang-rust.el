@@ -2,18 +2,7 @@
 
 (use-package rust-mode
   :init
-  (setq rust-mode-treesitter-derive t))
-
-(use-package rustic
-  :after (rust-mode)
-  :init
-  (setq rustic-lsp-server 'rust-analyzer
-        rustic-lsp-client 'eglot)
-  :hook
-  (rustic-mode . eglot-ensure))
-
-(with-eval-after-load 'rustic
-  (define-key rustic-mode-map (kbd "C-c C-c c") #'rustic-cargo-check)
-  (define-key rustic-mode-map (kbd "C-c C-c r") #'rustic-cargo-run))
+  (setq rust-mode-treesitter-derive t)
+  :hook (rust-mode . eglot-ensure))
 
 (provide 'lang-rust)
