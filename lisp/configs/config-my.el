@@ -55,9 +55,11 @@
     (eshell-next-prompt)))
 
 (defun my/eshell-here ()
+  (interactive)
   (my/eshell-to default-directory))
 
 (defun my/eshell-project-root ()
+  (interactive)
   (my/eshell-to (project-root (project-current))))
 
 (provide 'config-my)

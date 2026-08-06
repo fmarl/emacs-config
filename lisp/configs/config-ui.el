@@ -29,7 +29,7 @@
 	   (if (> sh-level 0)
 	       (concat "[" (number-to-string sh-level) "] ")
 	     "")
-	   (if (not (string-equal aws-profile ""))
+	   (if (not (eq aws-profile nil))
 	       (concat "[" aws-profile "] ")
 	     "")
 	   (if (= (user-uid) 0) "#" "λ")
