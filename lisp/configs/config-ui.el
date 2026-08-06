@@ -21,14 +21,19 @@
 
 (setq eshell-prompt-function
       (lambda ()
-	(concat
-	 (abbreviate-file-name default-directory)
-	 " ["
-	 (number-to-string
-	  (- (string-to-number (getenv "SHLVL")) 1))
-	 "] "
-	 (if (= (user-uid) 0) "#" "λ")
-	 " ")))
+	(let ((sh-level (- (string-to-number (getenv "SHLVL")) 1))
+	      (aws-profile (getenv "AWS_PROFILE")))
+	  (concat
+	   (abbreviate-file-name default-directory)
+	   " "
+	   (if (> sh-level 0)
+	       (concat "[" (number-to-string sh-level) "] ")
+	     "")
+	   (if (not (string-equal aws-profile ""))
+	       (concat "[" aws-profile "] ")
+	     "")
+	   (if (= (user-uid) 0) "#" "λ")
+	   " "))))
 
 (use-package ace-window :bind (("M-o" . ace-window)))
 (use-package avy

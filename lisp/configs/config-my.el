@@ -42,10 +42,9 @@
 
 (add-hook 'after-change-major-mode-hook #'my/lang-auto-enable)
 
-(defun my/eshell-here ()
+(defun my/eshell-to (dir)
   (interactive)
-  (let* ((dir default-directory)
-	 (buf (get-buffer "*eshell*"))
+  (let* ((buf (get-buffer "*eshell*"))
 	 (win (and buf (get-buffer-window buf t))))
     (if win
 	(select-window win)
@@ -54,5 +53,11 @@
                        (inhibit-same-window . t))))
     (eshell/cd dir)
     (eshell-next-prompt)))
+
+(defun my/eshell-here ()
+  (my/eshell-to default-directory))
+
+(defun my/eshell-project-root ()
+  (my/eshell-to (project-root (project-current))))
 
 (provide 'config-my)
