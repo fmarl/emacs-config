@@ -11,10 +11,6 @@
 
 (use-package which-key :config (which-key-mode))
 
-(use-package projectile
-  :init (projectile-mode +1)
-  :bind-keymap ("C-c p" . projectile-command-map))
-
 (use-package dirvish
   :init (dirvish-override-dired-mode)
   :bind
@@ -22,6 +18,17 @@
   :config
   (setq dirvish-default-layout '(0 0.3 0.7)
         dirvish-attributes '(subtree-state collapse git-msg)))
+
+(setq eshell-prompt-function
+      (lambda ()
+	(concat
+	 (abbreviate-file-name default-directory)
+	 " ["
+	 (number-to-string
+	  (- (string-to-number (getenv "SHLVL")) 1))
+	 "] "
+	 (if (= (user-uid) 0) "#" "λ")
+	 " ")))
 
 (use-package ace-window :bind (("M-o" . ace-window)))
 (use-package avy
