@@ -270,10 +270,6 @@ tabs, for example, is completely valid."
 (defun reka-enable ()
   "Enable the reka window manager for river. Call this function once when
 starting Emacs inside of river."
-  ;; TODO: this is a hack for lack of ability to figure out alignment ...
-  (menu-bar-mode 0)
-  (tool-bar-mode 0)
-
   ;; configure this and all future frames ..
   (let ((frame-params '((undecorated . t)
                         (buffer-predicate . reka--buffer-predicate))))

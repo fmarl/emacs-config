@@ -1,5 +1,7 @@
 ;;; config-minibuffer.el --- Minibuffer completion stack -*- lexical-binding: t; -*-
 
+(global-set-key (kbd "C-x C-b") 'ibuffer)
+
 (use-package consult
   :bind (("C-c M-x" . consult-mode-command)
          ("C-c h" . consult-history)

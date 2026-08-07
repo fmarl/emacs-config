@@ -29,6 +29,8 @@ elpa/
 snippets/
 transient/
 eshell/
+dirvish/
+elfeed/
 
 # Generated files
 history
