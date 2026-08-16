@@ -226,8 +226,14 @@ Can optionally set COMMAND to one of: `toggle-fullscreen'" ;; sic, only one
   (dolist (prefix reka-intercept-prefixes)
     (reka-push-intercept-prefix prefix)))
 
+(defconst reka-tab-prefixes
+  (mapcar (lambda (n) (format "s-%d" n))
+          (number-sequence 1 9)))
+
 (defcustom reka-intercept-prefixes
-  '("C-x" "C-u" "C-h" "M-x")
+  (append
+   reka-tab-prefixes
+   '("C-x" "C-u" "C-h" "M-x"))
   "Prefix keys that should always go to Emacs."
   :type '(repeat key)
   :set (lambda (sym val)
@@ -303,6 +309,13 @@ starting Emacs inside of river."
   ;; TODO: figure out if/how this breaks multi-frame focus changes ...
   (advice-add 'handle-focus-in  :around #'reka--suppress-focus-event)
   (advice-add 'handle-focus-out :around #'reka--suppress-focus-event)
+
+  ;; Tab switching
+  (setq tab-bar-select-tab-modifiers '(super))
+  (tab-bar-mode 1)
+  
+  ;; Application launcher
+  (global-set-key (kbd "s-p") #'app-launcher-run-app)
 
   (run-hooks 'reka-enable-hook))
 

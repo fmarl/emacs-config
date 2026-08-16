@@ -1,7 +1,5 @@
 ;;; config-ui.el --- Theme, navigation and UI packages -*- lexical-binding: t; -*-
 
-(tab-bar-mode 1)
-
 (use-package ef-themes
   :init
   (ef-themes-take-over-modus-themes-mode 1)
