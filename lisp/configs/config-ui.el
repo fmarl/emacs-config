@@ -1,5 +1,8 @@
 ;;; config-ui.el --- Theme, navigation and UI packages -*- lexical-binding: t; -*-
 
+(display-time-mode 1)
+(display-battery-mode 1)
+
 (use-package ef-themes
   :init
   (ef-themes-take-over-modus-themes-mode 1)
