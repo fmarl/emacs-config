@@ -62,14 +62,18 @@
 (when (eq system-type 'darwin)
   (require 'config-lex))
 
+(require 'config-reka)
+(reka-enable)
+
 ;; envrc needs to be enabled late in init
 (use-package envrc
   :config (envrc-global-mode 1))
 
+(use-package eat
+  :hook ((eshell-load-hook . eat-eshell-mode)
+	 (eshell-load-hook . eat-eshell-visual-command-mode)))
+
 (when (file-exists-p custom-file)
   (load custom-file))
-
-(require 'config-reka)
-(reka-enable)
 
 (provide 'init)

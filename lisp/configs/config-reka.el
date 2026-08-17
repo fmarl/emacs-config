@@ -316,7 +316,8 @@ starting Emacs inside of river."
   
   ;; Application launcher
   (global-set-key (kbd "s-p") #'app-launcher-run-app)
-
+  (global-set-key (kbd "s-<return>") #'eat)
+  
   (run-hooks 'reka-enable-hook))
 
 (provide 'config-reka)
