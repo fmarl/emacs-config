@@ -50,20 +50,17 @@
 (savehist-mode 1)
 (recentf-mode 1)
 (save-place-mode 1)
+(tab-bar-mode 1)
 
 (add-to-list 'load-path (expand-file-name "lisp/langs/" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "reka/" user-emacs-directory))
 
 (mapc #'require '(config-my config-ui config-editing config-minibuffer
 			    config-completion config-eglot config-org config-circe
-			    config-magit config-mu4e config-elfeed config-meow config-reka))
+			    config-magit config-mu4e config-elfeed config-meow))
 
 (when (eq system-type 'darwin)
   (require 'config-lex))
-
-(require 'config-reka)
-(reka-enable)
 
 ;; envrc needs to be enabled late in init
 (use-package envrc

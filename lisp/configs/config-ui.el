@@ -1,7 +1,6 @@
 ;;; config-ui.el --- Theme, navigation and UI packages -*- lexical-binding: t; -*-
 
-(display-time-mode 1)
-(display-battery-mode 1)
+(global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (use-package ef-themes
   :init
