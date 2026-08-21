@@ -11,6 +11,7 @@
 	    (setq gc-cons-threshold (* 100 1024 1024))))
 
 ;; Disable UI elements before the first frame is drawn
+(push '(undecorated . t) default-frame-alist)
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
