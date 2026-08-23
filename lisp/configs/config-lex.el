@@ -27,7 +27,7 @@
          (days (read-string "Days?: "))
          (cmd (format "printf '%s\n%s\n%s\n' | %s/tools/finalize -file %s"
                       vuln ignore days
-                      (projectile-project-root)
+		      (project-root (project-current buffer-file-name))
                       (shell-quote-argument (buffer-file-name)))))
     (compile cmd)))
 
