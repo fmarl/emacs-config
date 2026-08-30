@@ -9,7 +9,7 @@
                        (setq line-spacing 0.2)
                        (display-line-numbers-mode 0))))
   :bind (("C-c a" . org-agenda)
-         ("C-c c" . org-capture)
+         ("C-c o" . org-capture)
          ("C-c l" . org-store-link))
   :config
   (setq org-hide-emphasis-markers t
@@ -60,10 +60,10 @@
         org-modern-table t
         org-modern-checkbox '((?X . "☑") (?- . "☒") (?\s . "☐"))
         org-modern-todo-faces
-        '(("TODO" . (:foreground "#BF616A" :weight bold))
-          ("IN-PROGRESS" . (:foreground "#EBCB8B" :weight bold))
-          ("DONE" . (:foreground "#A3BE8C" :weight bold))
-          ("CANCELLED" . (:foreground "#5E81AC" :weight normal)))))
+        '(("TODO" . (:foreground "#d67869" :weight bold))
+          ("IN-PROGRESS" . (:foreground "#c09f6f" :weight bold))
+          ("DONE" . (:foreground "#70bb70" :weight bold))
+          ("CANCELLED" . (:foreground "#857f8f" :weight normal)))))
 
 (use-package denote
   :hook (dired-mode . denote-dired-mode)

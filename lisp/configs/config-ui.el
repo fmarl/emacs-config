@@ -16,7 +16,7 @@
 (use-package dirvish
   :init (dirvish-override-dired-mode)
   :bind
-  (("<f6>" . dirvish-dwim))
+  (("C-c d" . dirvish-dwim))
   :config
   (setq dirvish-default-layout '(0 0.3 0.7)
         dirvish-attributes '(subtree-state collapse git-msg)))
@@ -37,10 +37,9 @@
 	   (if (= (user-uid) 0) "#" "λ")
 	   " "))))
 
-(use-package ace-window :bind (("M-o" . ace-window)))
+(use-package ace-window :bind (("C-c w" . ace-window)))
 (use-package avy
-  :bind (("C-:" . avy-goto-char-timer)
-	 ("M-g -" . avy-kill-region)
+  :bind (("M-g -" . avy-kill-region)
 	 ("M-g =" . avy-move-region)
 	 ("M-g +" . avy-copy-region)))
 

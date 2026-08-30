@@ -78,11 +78,11 @@ Comint handles the sudo password prompt, so it never touches disk."
 
 (defvar nixcmds-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "C-c x s") #'nixos-rebuild-switch)
-    (define-key map (kbd "C-c x t") #'nixos-rebuild-test)
-    (define-key map (kbd "C-c x b") #'nixos-rebuild-boot)
-    (define-key map (kbd "C-c x h") #'home-manager-switch)
-    (define-key map (kbd "C-c x d") #'darwin-rebuild-switch)
+    (define-key map (kbd "C-c t s") #'nixos-rebuild-switch)
+    (define-key map (kbd "C-c t t") #'nixos-rebuild-test)
+    (define-key map (kbd "C-c t b") #'nixos-rebuild-boot)
+    (define-key map (kbd "C-c t h") #'home-manager-switch)
+    (define-key map (kbd "C-c t d") #'darwin-rebuild-switch)
     map)
   "Keymap for `nixcmds-mode'.")
 

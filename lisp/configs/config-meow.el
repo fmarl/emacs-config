@@ -15,11 +15,6 @@
           (meow-beacon-change . meow-beacon-change-char)))
 
   (meow-leader-define-key
-   '("r" . consult-ripgrep)
-   '("f" . find-file)
-   '("b" . consult-buffer)
-   '("u" . magit-status-quick)
-   '("s" . "M-s")
    '("1" . meow-digit-argument)
    '("2" . meow-digit-argument)
    '("3" . meow-digit-argument)

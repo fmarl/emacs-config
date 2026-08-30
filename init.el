@@ -92,9 +92,6 @@
 (setopt show-trailing-whitespace nil)      ; By default, don't underline trailing spaces
 (setopt indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
 
-;; Use common keystrokes by default
-(cua-mode)
-
 ;; Makes it easier to repeat commands; `C-x o C-x o' becomes `C-x o o'
 ;; See https://karthinks.com/software/it-bears-repeating/
 (repeat-mode)
@@ -132,7 +129,7 @@
 (add-to-list 'load-path (expand-file-name "lisp/langs/" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
 
-(mapc #'require '(config-my config-ui config-editing config-minibuffer
+(mapc #'require '(config-my config-keys config-ui config-editing config-minibuffer
 			    config-completion config-eglot config-org config-circe
 			    config-magit config-mu4e config-elfeed config-meow))
 

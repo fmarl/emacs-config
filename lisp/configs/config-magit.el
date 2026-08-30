@@ -1,8 +1,8 @@
- ;;; config-magit.el --- Magit related config -*- lexical-binding: t; -*-
+;;; config-magit.el --- Magit related config -*- lexical-binding: t; -*-
 
 (use-package magit
   :commands (magit-status magit-get-current-branch)
-  :bind (("C-x g" . magit-status))
+  :bind (("C-c u" . magit-status-quick))
   :config
   (add-hook 'git-commit-setup-hook 'my/magit/add-jira-issue-to-commit-msg)
   (add-hook 'git-commit-post-finish-hook 'my/magit/hotfix-log-to-org))
