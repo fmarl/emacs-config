@@ -55,9 +55,9 @@
 
 (use-package orderless
   :init
-  (setq completion-styles '(orderless)
+  (setq completion-styles '(orderless basic)
         completion-category-defaults nil
-        completion-category-overrides '((file (styles orderless)))))
+        completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package vertico
   :init (vertico-mode))
