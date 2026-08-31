@@ -65,7 +65,8 @@
  shr-inhibit-images t
  backup-directory-alist '((".*" . "~/.cache/emacs/backups/"))
  backup-enable-predicate #'my/backup-enable-p
- auto-save-default nil
+ auto-save-file-name-transforms '((".*" "~/.cache/emacs/auto-save/" t))
+ auto-save-list-file-prefix "~/.cache/emacs/auto-save/.saves-"
 
  ;; keep runtime state in ~/.cache instead of the config repo
  savehist-file "~/.cache/emacs/history"
@@ -111,7 +112,12 @@
 
 (global-prettify-symbols-mode 1)
 
-(make-directory "~/.cache/emacs/" t)
+(make-directory "~/.cache/emacs/auto-save/" t)
+
+(add-hook 'find-file-hook
+          (lambda ()
+            (unless (my/backup-enable-p buffer-file-name)
+              (auto-save-mode -1))))
 (savehist-mode 1)
 (recentf-mode 1)
 (save-place-mode 1)
