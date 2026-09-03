@@ -24,7 +24,7 @@
     (nix-ts-mode . "nix")
     (tuareg-mode . "ocaml")
     (python-mode . "python") (python-ts-mode . "python")
-    (rust-mode . "rust") (rustic-mode . "rust")
+    (rust-ts-mode . "rust")
     (sh-mode . "shell") (bash-ts-mode . "shell")
     (zig-mode . "zig"))
   "Major modes and the lang module that configures them.")
