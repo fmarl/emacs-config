@@ -6,14 +6,12 @@
   (setq eglot-sync-connect nil
         eglot-autoshutdown t
         eglot-extend-to-xref t
-	eglot-code-action-indicator "*>"))
+        eglot-code-action-indicator "*>"
+        eglot-events-buffer-config '(:size 0 :format full)))
 
 (use-package consult-eglot
   :after (consult eglot)
   :bind (:map eglot-mode-map
-              ("M-." . xref-find-definitions)
-              ("M-," . xref-go-back)
-	      ("M-?" . xref-find-references)
               ("C-c e s" . consult-eglot-symbols)
               ("C-c e a" . eglot-code-actions)
               ("C-c e r" . eglot-rename)))

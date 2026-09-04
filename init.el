@@ -15,7 +15,6 @@
 ;; Set this to `nil' if Emacs is having trouble picking up changes.
 (setopt auto-revert-avoid-polling t)
 (setopt auto-revert-interval 5)
-(setopt auto-revert-check-vc-info t)
 (global-auto-revert-mode)
 
 ;; Don't ping url-looking things when running find-file
@@ -52,7 +51,6 @@
  use-package-expand-minimally t
  read-process-output-max (* 1024 1024)
  inhibit-startup-screen t
- native-comp-async-report-warnings-errors nil
  ring-bell-function 'ignore
  load-prefer-newer t
  epg-pinentry-mode 'loopback
@@ -80,7 +78,6 @@
 
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
-(set-cursor-color "#ffffff")
 (add-to-list 'default-frame-alist '(font . "Aporetic Sans Mono 14"))
 
 (setopt line-number-mode t)

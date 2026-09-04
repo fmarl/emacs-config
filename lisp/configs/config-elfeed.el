@@ -1,4 +1,4 @@
- ;;; config-elfeed.el --- My RSS reader config -*- lexical-binding: t; -*-
+;;; config-elfeed.el --- My RSS reader config -*- lexical-binding: t; -*-
 
 (use-package elfeed
   :defer t

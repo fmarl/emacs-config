@@ -27,7 +27,7 @@
 
 (defun nixcmds--project-root ()
   "Return project root directory or signal an error."
-  (or (when-let ((proj (project-current)))
+  (or (when-let* ((proj (project-current)))
         (project-root proj))
       (user-error "No project root found (project.el)")))
 
