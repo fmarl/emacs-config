@@ -4,8 +4,7 @@
   :ensure nil
   :defer 5
   :config
-  (setq mu4e-maildir "~/Mail"
-        mu4e-get-mail-command "mbsync -a"
+(setq mu4e-get-mail-command "mbsync -a"
         mu4e-update-interval 300
         mu4e-headers-auto-update t
         mu4e-headers-date-format "%Y-%m-%d %H:%M"
@@ -50,19 +49,21 @@
         mu4e-view-show-addresses t
         mu4e-change-filenames-when-moving t)
 
-  (setq mu4e-sent-folder   "/Sent"
-        mu4e-drafts-folder "/Drafts"
-        mu4e-trash-folder  "/Trash"
-        mu4e-refile-folder "/Archive")
+  (setq mu4e-sent-folder   "/ionos/Gesendete Objekte"
+        mu4e-drafts-folder "/ionos/Entwürfe"
+        mu4e-trash-folder  "/ionos/Papierkorb"
+        mu4e-refile-folder "/ionos/Archive")
 
   (setq mu4e-maildir-shortcuts
-        '(("/INBOX"          . ?i)
-          ("/kernel-linux"   . ?k)
-          ("/kernel-janitors" . ?j)
-          ("/guix-devel"     . ?g)
-          ("/Sent"           . ?s)
-          ("/Archive"        . ?a))
+        '((:maildir "/ionos/Inbox"             :key ?i)
+          (:maildir "/ionos/Gesendete Objekte" :key ?s)
+          (:maildir "/ionos/Archive"           :key ?a))
         mu4e-headers-include-related t)
+
+  (dolist (bm '((:name "kernel-janitors"  :query "list:kernel-janitors.vger.kernel.org"     :key ?j)
+                (:name "linux-hardening"  :query "list:linux-hardening.vger.kernel.org"     :key ?h)
+                (:name "kernel-hardening" :query "list:kernel-hardening.lists.openwall.com" :key ?k)))
+    (add-to-list 'mu4e-bookmarks bm t))
 
   (defun my/mu4e-b4-shazam (msg)
     "Apply the series containing MSG to the kernel tree with b4 shazam."
