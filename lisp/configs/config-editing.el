@@ -5,6 +5,9 @@
 (use-package paredit
   :hook ((emacs-lisp-mode lisp-mode scheme-mode clojure-mode) . paredit-mode))
 
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
+
 (use-package apheleia
   :init (apheleia-global-mode 1)
   :config
