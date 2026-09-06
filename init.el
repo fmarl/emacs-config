@@ -4,8 +4,6 @@
   (and (normal-backup-enable-predicate name)
        (not (string-match-p "/\\.\\(aws\\|ssh\\|gnupg\\)/\\|/secrets/\\|\\.env\\(\\.[^/]*\\)?\\'" name))))
 
-(setopt display-time-default-load-average nil)
-
 ;; Automatically reread from disk if the underlying file changes by
 ;; using the OS file change notification interface rather than
 ;; repeatedly polling to see if there are changes.
@@ -121,13 +119,6 @@
 
 ;; Show the tab-bar as soon as tab-bar functions are invoked
 (setopt tab-bar-show 1)
-
-;; Add the time to the tab-bar, if visible
-(add-to-list 'tab-bar-format 'tab-bar-format-align-right 'append)
-(add-to-list 'tab-bar-format 'tab-bar-format-global 'append)
-(setopt display-time-format "%a %F %T")
-(setopt display-time-interval 1)
-(display-time-mode)
 
 (add-to-list 'load-path (expand-file-name "lisp/langs/" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
