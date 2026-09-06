@@ -3,7 +3,7 @@
 (use-package markdown-mode :mode "\\.md\\'")
 
 (use-package paredit
-  :hook ((emacs-lisp-mode) . paredit-mode))
+  :hook ((emacs-lisp-mode lisp-mode scheme-mode clojure-mode) . paredit-mode))
 
 (use-package apheleia
   :init (apheleia-global-mode 1)
