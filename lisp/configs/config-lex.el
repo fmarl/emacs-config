@@ -16,10 +16,6 @@
   :mode "\\.tf\\'"
   :hook (terraform-mode . eglot-ensure))
 
-;; YAML
-(use-package yaml-mode :mode (("\\.yml\\'" . yaml-mode)
-			      ("\\.yaml\\'" . yaml-mode)))
-
 (defun my/run-finalize ()
   (interactive)
   (let* ((vuln (read-string "Vulnerable?: "))

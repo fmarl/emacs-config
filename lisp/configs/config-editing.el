@@ -22,4 +22,10 @@
 ;; Use js-json-mode for JSON files (built-in, no auto-formatting)
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js-json-mode))
 
+(dolist (entry '((json "\\.json\\'" . json-ts-mode)
+                 (toml "\\.toml\\'" . toml-ts-mode)
+                 (yaml "\\.ya?ml\\'" . yaml-ts-mode)))
+  (when (treesit-language-available-p (car entry))
+    (add-to-list 'auto-mode-alist (cdr entry))))
+
 (provide 'config-editing)
