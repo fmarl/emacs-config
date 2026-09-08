@@ -4,7 +4,49 @@
   (and (normal-backup-enable-predicate name)
        (not (string-match-p "/\\.\\(aws\\|ssh\\|gnupg\\)/\\|/secrets/\\|\\.env\\(\\.[^/]*\\)?\\'" name))))
 
-(setq ;; packages come from Nix/Guix; package.el must never reach out
+(setopt display-time-default-load-average nil)
+
+;; Automatically reread from disk if the underlying file changes by
+;; using the OS file change notification interface rather than
+;; repeatedly polling to see if there are changes.
+;;
+;; Some systems don't do file notifications well; see
+;; https://todo.sr.ht/~ashton314/emacs-bedrock/11
+;; Set this to `nil' if Emacs is having trouble picking up changes.
+(setopt auto-revert-avoid-polling t)
+(setopt auto-revert-interval 5)
+(setopt auto-revert-check-vc-info t)
+(global-auto-revert-mode)
+
+;; Don't ping url-looking things when running find-file
+(setopt ffap-machine-p-known 'reject)
+
+;; Rebalance windows automatically when splitting
+(setopt window-combination-resize t)
+
+;; Prefer horizontal split on landscape monitors: `longest' is
+;; default; can be `vertical' or `horizontal'.
+;; See also the variable `split-width-threshold'.
+(setopt split-window-preferred-direction 'longest)
+
+;; Fix archaic defaults; justification: https://practicaltypography.com/one-space-between-sentences.html
+(setopt sentence-end-double-space nil)
+
+;; Basic speedups
+;;
+;; Emacs works really hard to be incredibly compatible out-of-the-box
+;; with a wide variety of languages. That comes at the cost of a
+;; little performance. These tell Emacs to assume left-to-right text
+;; in all buffers.
+;; Remove/comment if you read right-to-left languages (Arabic, Hebrew, etc.)
+(setq-default bidi-paragraph-direction 'left-to-right)
+(setq bidi-inhibit-bpa t)
+
+;; Misc. UI tweaks
+(blink-cursor-mode -1)                                ; Steady cursor
+(pixel-scroll-precision-mode)                         ; Smooth scrolling
+
+(setq
  package-archives nil
  use-package-always-ensure nil
  use-package-expand-minimally t
@@ -40,17 +82,52 @@
 (set-cursor-color "#ffffff")
 (add-to-list 'default-frame-alist '(font . "Aporetic Sans Mono 14"))
 
-(column-number-mode 1)
-(global-display-line-numbers-mode 1)
-(show-paren-mode 1)
+(setopt line-number-mode t)
+(setopt column-number-mode t)
+(setopt mode-line-collapse-minor-modes nil)
+
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
+(setopt display-line-numbers-width 3)           ; Set a minimum width
+
+(setopt show-trailing-whitespace nil)      ; By default, don't underline trailing spaces
+(setopt indicate-buffer-boundaries 'left)  ; Show buffer top and bottom in the margin
+
+;; Use common keystrokes by default
+(cua-mode)
+
+;; Makes it easier to repeat commands; `C-x o C-x o' becomes `C-x o o'
+;; See https://karthinks.com/software/it-bears-repeating/
+(repeat-mode)
+
+;; Nice line wrapping when working with text
+(add-hook 'text-mode-hook 'visual-line-mode)
+
+(setopt global-hl-line-sticky-flag 'window) ; Every window gets own hl-line instance
+(global-hl-line-mode)
+
+;; Show matching delimiters
+(setopt show-paren-delay 0)
+(setopt show-paren-mode t)
+(setopt show-paren-style 'expression)   ; default is 'parenthesis and just does delimiters
+(setopt show-paren-context-when-offscreen 'overlay)
 (electric-pair-mode 1)
+
 (global-prettify-symbols-mode 1)
 
 (make-directory "~/.cache/emacs/" t)
 (savehist-mode 1)
 (recentf-mode 1)
 (save-place-mode 1)
-(tab-bar-mode 1)
+
+;; Show the tab-bar as soon as tab-bar functions are invoked
+(setopt tab-bar-show 1)
+
+;; Add the time to the tab-bar, if visible
+(add-to-list 'tab-bar-format 'tab-bar-format-align-right 'append)
+(add-to-list 'tab-bar-format 'tab-bar-format-global 'append)
+(setopt display-time-format "%a %F %T")
+(setopt display-time-interval 1)
+(display-time-mode)
 
 (add-to-list 'load-path (expand-file-name "lisp/langs/" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
@@ -62,13 +139,24 @@
 (when (eq system-type 'darwin)
   (require 'config-lex))
 
+;; isearch is Emacs's built-in searching system
+(use-package isearch
+  :ensure nil                           ; already installed
+  :bind
+  (:map isearch-mode-map
+        ("C-." . isearch-forward-thing-at-point)) ; Search for thing under cursor
+  :custom
+  (lazy-count-prefix-format "(%s/%s) ")
+  (isearch-lazy-count t)                 ; show match count
+  (isearch-allow-motion t)
+  (isearch-allow-scroll t)               ; lets you scroll without breaking search
+  (isearch-repeat-on-direction-change t) ; C-r immediately goes to previous match
+  (isearch-wrap-pause 'no-ding)          ; Automatically wrap search to top
+  )
+
 ;; envrc needs to be enabled late in init
 (use-package envrc
   :config (envrc-global-mode 1))
-
-(use-package eat
-  :hook ((eshell-load-hook . eat-eshell-mode)
-	 (eshell-load-hook . eat-eshell-visual-command-mode)))
 
 (when (file-exists-p custom-file)
   (load custom-file))
