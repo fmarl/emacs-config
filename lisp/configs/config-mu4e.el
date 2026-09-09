@@ -58,19 +58,6 @@
         '((:maildir "/ionos/Inbox"             :key ?i)
           (:maildir "/ionos/Gesendete Objekte" :key ?s)
           (:maildir "/ionos/Archive"           :key ?a))
-        mu4e-headers-include-related t)
-
-  (dolist (bm '((:name "kernel-janitors"  :query "list:kernel-janitors.vger.kernel.org"     :key ?j)
-                (:name "linux-hardening"  :query "list:linux-hardening.vger.kernel.org"     :key ?h)
-                (:name "kernel-hardening" :query "list:kernel-hardening.lists.openwall.com" :key ?k)))
-    (add-to-list 'mu4e-bookmarks bm t))
-
-  (defun my/mu4e-b4-shazam (msg)
-    "Apply the series containing MSG to the kernel tree with b4 shazam."
-    (let ((default-directory my/kernel-src-dir))
-      (compile (format "b4 shazam %s"
-		       (shell-quote-argument (mu4e-message-field msg :message-id))))))
-
-  (add-to-list 'mu4e-view-actions '("b4 shazam series" . my/mu4e-b4-shazam) t))
+        mu4e-headers-include-related t))
 
 (provide 'config-mu4e)

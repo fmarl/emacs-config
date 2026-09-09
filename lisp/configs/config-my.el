@@ -1,7 +1,5 @@
 ;;; config-my.el --- Some custom functions -*- lexical-binding: t; -*-
 
-(defconst my/kernel-src-dir (expand-file-name "~/src/kernel/linux/"))
-
 (defun my/enable-lang (lang)
   (interactive
    (list (completing-read
