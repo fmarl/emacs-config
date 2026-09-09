@@ -27,22 +27,6 @@
                       (shell-quote-argument (buffer-file-name)))))
     (compile cmd)))
 
-(defun run-git-shepherd ()
-  "Run git-shepherd to sync local git repos"
-  (interactive)
-  (let ((shepherd (expand-file-name "~/Devel/SecEn/git-shepherd/main.py"))
-	(buffer (get-buffer-create "*git-shepherd*")))
-    (start-process
-     "git-shepherd"
-     buffer
-     "python"
-     shepherd)
-    (display-buffer buffer)))
-
-(defun edit-git-shepherd ()
-  (interactive)
-  (find-file-other-window (expand-file-name "~/.git-shepherd")))
-
 (use-package worktime
   :load-path "lisp/worktime/"
   :config (worktime-mode))
