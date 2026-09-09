@@ -27,6 +27,20 @@
                       (shell-quote-argument (buffer-file-name)))))
     (compile cmd)))
 
+(defun my/magit/extract-jira-issue-from-branch ()
+  "Extract a Jira Issue Key from the current branch."
+  (let ((branch-name (magit-get-current-branch)))
+    (when (string-match "\\`\\([A-Z]+-[0-9]+\\)" branch-name)
+      (match-string 0 branch-name))))
+
+(defun my/magit/add-jira-issue-to-commit-msg ()
+  "Extract a Jira Issue Key from the current branch and insert it into the commit msg."
+  (let ((jira-issue (my/magit/extract-jira-issue-from-branch)))
+    (when jira-issue
+      (insert (format "%s " jira-issue)))))
+
+(add-hook 'git-commit-setup-hook #'my/magit/add-jira-issue-to-commit-msg)
+
 (use-package worktime
   :load-path "lisp/worktime/"
   :config (worktime-mode))
