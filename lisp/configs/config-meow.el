@@ -5,7 +5,6 @@
 
   (add-to-list 'meow-mode-state-list '(circe-mode . insert))
   (add-to-list 'meow-mode-state-list '(eshell-mode . insert))
-  (add-to-list 'meow-mode-state-list '(eat-mode . insert))
 
   (setq meow-selection-command-fallback
         '((meow-change . meow-change-char)
