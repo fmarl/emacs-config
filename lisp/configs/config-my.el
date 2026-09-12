@@ -20,7 +20,7 @@
     (java-mode . "java") (java-ts-mode . "java")
     (nasm-mode . "nasm")
     (nix-ts-mode . "nix")
-    (tuareg-mode . "ocaml")
+    (tuareg-mode . "ocaml") (tuareg-interface-mode . "ocaml")
     (python-mode . "python") (python-ts-mode . "python")
     (rust-ts-mode . "rust")
     (sh-mode . "shell") (bash-ts-mode . "shell")
@@ -39,5 +39,10 @@
 	(normal-mode)))))
 
 (add-hook 'after-change-major-mode-hook #'my/lang-auto-enable)
+
+;; Guix's emacs-tuareg ships tuareg.el as its autoloads file
+(add-to-list 'auto-mode-alist '("\\.ml[p]?\\'" . tuareg-mode))
+(add-to-list 'auto-mode-alist '("\\.mli\\'" . tuareg-interface-mode))
+(add-to-list 'auto-mode-alist '("\\.ocamlinit\\'" . tuareg-mode))
 
 (provide 'config-my)
