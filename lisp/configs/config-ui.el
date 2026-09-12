@@ -19,7 +19,7 @@
   (("C-c d" . dirvish-dwim))
   :config
   (setq dirvish-default-layout '(0 0.3 0.7)
-        dirvish-attributes '(subtree-state collapse git-msg)))
+        dirvish-attributes '(subtree-state collapse)))
 
 (setq eshell-prompt-function
       (lambda ()
