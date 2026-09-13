@@ -19,7 +19,6 @@
   :hook ((magit-pre-refresh . diff-hl-magit-pre-refresh)
 	 (magit-post-refresh . diff-hl-magit-post-refresh)))
 
-;; Use js-json-mode for JSON files (built-in, no auto-formatting)
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js-json-mode))
 
 (dolist (entry '((json "\\.json\\'" . json-ts-mode)

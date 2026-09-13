@@ -24,8 +24,7 @@
     (python-mode . "python") (python-ts-mode . "python")
     (rust-ts-mode . "rust")
     (sh-mode . "shell") (bash-ts-mode . "shell")
-    (zig-mode . "zig"))
-  "Major modes and the lang module that configures them.")
+    (zig-mode . "zig")))
 
 (defun my/lang-auto-enable ()
   "Load the lang module for the current major mode on first use."
@@ -33,8 +32,6 @@
 	      (feature (intern (concat "lang-" lang))))
     (unless (featurep feature)
       (require feature)
-      ;; re-run mode selection so hooks and remaps from the
-      ;; freshly loaded module apply to this buffer as well
       (when buffer-file-name
 	(normal-mode)))))
 
