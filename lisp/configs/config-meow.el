@@ -1,5 +1,8 @@
 ;;; config-meow.el --- Meow editing config -*- lexical-binding: t; -*-
 
+;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 (defun meow-setup ()
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
 

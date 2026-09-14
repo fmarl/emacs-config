@@ -1,5 +1,8 @@
 ;;; config-minibuffer.el --- Minibuffer completion stack -*- lexical-binding: t; -*-
 
+;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 (use-package consult
   :bind (("C-c b" . consult-buffer)
          ("C-c r" . consult-ripgrep)

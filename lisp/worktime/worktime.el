@@ -1,5 +1,8 @@
 ;;; worktime.el --- Calculate the remaining time for the current working day -*- lexical-binding: t; -*-
 
+;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 ;; Author: Florian Marrero Liestmann <f.m.liestmann@fx-ttr.de>
 ;; Version: 0.1
 ;; Package-Requires: ((emacs "27.1"))

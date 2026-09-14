@@ -1,5 +1,8 @@
 ;;; config-mu4e.el --- My Mail config -*- lexical-binding: t; -*-
 
+;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 (use-package mu4e
   :ensure nil
   :commands mu4e

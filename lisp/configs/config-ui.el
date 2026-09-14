@@ -1,5 +1,8 @@
 ;;; config-ui.el --- Theme, navigation and UI packages -*- lexical-binding: t; -*-
 
+;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 (global-set-key (kbd "C-x C-b") 'ibuffer)
 
 (use-package ef-themes

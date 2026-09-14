@@ -1,5 +1,8 @@
 ;;; init.el --- Main configuration -*- lexical-binding: t; -*-
 
+;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 (defun my/backup-enable-p (name)
   (and (normal-backup-enable-predicate name)
        (not (string-match-p "/\\.\\(aws\\|ssh\\|gnupg\\)/\\|/secrets/\\|\\.env\\(\\.[^/]*\\)?\\'" name))))

@@ -1,5 +1,8 @@
 ;;; config-org.el --- Modern Org-Mode Configuration -*- lexical-binding: t; -*-
 
+;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 (use-package org
   :ensure nil
   :hook ((org-mode . visual-line-mode)

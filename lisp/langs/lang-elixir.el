@@ -1,5 +1,8 @@
 ;;; lang-elixir.el --- Elixir development setup -*- lexical-binding: t; -*-
 
+;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
+;; SPDX-License-Identifier: GPL-3.0-or-later
+
 (use-package elixir-ts-mode
   :mode (("\\.ex\\'" . elixir-ts-mode)
 	 ("\\.exs\\'" . elixir-ts-mode)
