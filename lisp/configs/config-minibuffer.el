@@ -67,7 +67,7 @@
 
 (use-package embark
   :bind (("C-." . embark-act)
-	 ("C-h B" . embark-bindings))
+         ("C-h B" . embark-bindings))
   :init
   (setq prefix-help-command #'embark-prefix-help-command))
 

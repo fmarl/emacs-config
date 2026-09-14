@@ -7,7 +7,7 @@
   :ensure nil
   :commands mu4e
   :config
-(setq mu4e-get-mail-command "mbsync -a"
+  (setq mu4e-get-mail-command "mbsync -a"
         mu4e-update-interval 300
         mu4e-headers-auto-update t
         mu4e-headers-date-format "%Y-%m-%d %H:%M"

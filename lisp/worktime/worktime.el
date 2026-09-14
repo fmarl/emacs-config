@@ -42,7 +42,7 @@
 (defun worktime--start-work (hour minute)
   (interactive "nStart Hour: \nnStart Minute: ")
   (let* ((minutes-per-day (* 24 60))
-	 (start-time (mod (+ (mod (+ (* hour 60) minute) minutes-per-day) minutes-per-day) minutes-per-day)))
+         (start-time (mod (+ (mod (+ (* hour 60) minute) minutes-per-day) minutes-per-day) minutes-per-day)))
     (progn
       (setq worktime--start-time start-time)
       (worktime--add (/ worktime-hours-per-week worktime-days-per-week) 0)
@@ -51,13 +51,13 @@
 (defun worktime--add (hours minutes)
   (let ((minutes-per-day (* 24 60)))
     (if (not (null worktime--start-time))
-	(setq worktime--end-time
-	      (mod (+ worktime--start-time (+ (* hours 60) minutes worktime-break-per-day)) minutes-per-day))
+        (setq worktime--end-time
+              (mod (+ worktime--start-time (+ (* hours 60) minutes worktime-break-per-day)) minutes-per-day))
       '())))
 
 (defun worktime--to-string (sign time)
   (let ((hour (/ time 60))
-	(minute (mod time 60)))
+        (minute (mod time 60)))
     (format "%s%02d:%02d" sign hour minute)))
 
 (defun worktime--end-time-to-string ()
@@ -69,24 +69,24 @@
 
 (defun worktime--remaining-to-string ()
   (let* ((remaining-time (- worktime--end-time (worktime--current-minute-of-day)))
-	 (sign (if (> remaining-time 0) "-" "")))
+         (sign (if (> remaining-time 0) "-" "")))
     (worktime--to-string sign remaining-time)))
 
 (defun worktime--update ()
   (if (not (null worktime--start-time))
       (let ((end-time (worktime--end-time-to-string))
-	    (remaining-time (worktime--remaining-to-string)))
-	(setq worktime--modeline-string
-	      (format " %s %s" remaining-time end-time)))
+            (remaining-time (worktime--remaining-to-string)))
+        (setq worktime--modeline-string
+              (format " %s %s" remaining-time end-time)))
     "")
   (force-mode-line-update t))
 
 (defun worktime--start-timer ()
   (setq worktime--timer
-	(run-at-time
-	 (- 60 (nth 1 (decode-time (current-time))))
-	 60
-	 #'worktime--update)))
+        (run-at-time
+         (- 60 (nth 1 (decode-time (current-time))))
+         60
+         #'worktime--update)))
 
 (defun worktime--stop-timer ()
   (when worktime--timer
@@ -94,7 +94,7 @@
     (setq worktime--timer nil)))
 (defun worktime--register-modeline ()
   (add-to-list 'minor-mode-alist
-	       '(worktime-mode (:eval worktime--modeline-string))))
+               '(worktime-mode (:eval worktime--modeline-string))))
 
 (define-minor-mode worktime-mode
   "Minor mode which lets you track your worktime"
@@ -102,9 +102,9 @@
   :global t
   (if worktime-mode
       (progn
-	(worktime--register-modeline)
-	(worktime--start-timer)
-	(worktime--update))
+        (worktime--register-modeline)
+        (worktime--start-timer)
+        (worktime--update))
     (worktime--stop-timer)))
 
 (provide 'worktime)

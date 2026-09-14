@@ -5,8 +5,8 @@
 
 (use-package elixir-ts-mode
   :mode (("\\.ex\\'" . elixir-ts-mode)
-	 ("\\.exs\\'" . elixir-ts-mode)
-	 ("mix\\.lock\\'" . elixir-ts-mode))
+         ("\\.exs\\'" . elixir-ts-mode)
+         ("mix\\.lock\\'" . elixir-ts-mode))
   :hook ((elixir-ts-mode heex-ts-mode) . eglot-ensure))
 
 (use-package heex-ts-mode
@@ -16,6 +16,6 @@
 ;; language_server.sh that eglot expects by default
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-	       '((elixir-ts-mode heex-ts-mode) . ("elixir-ls"))))
+               '((elixir-ts-mode heex-ts-mode) . ("elixir-ls"))))
 
 (provide 'lang-elixir)

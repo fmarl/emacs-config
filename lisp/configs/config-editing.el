@@ -20,7 +20,7 @@
 (use-package diff-hl
   :init (global-diff-hl-mode)
   :hook ((magit-pre-refresh . diff-hl-magit-pre-refresh)
-	 (magit-post-refresh . diff-hl-magit-post-refresh)))
+         (magit-post-refresh . diff-hl-magit-post-refresh)))
 
 (add-to-list 'auto-mode-alist '("\\.json\\'" . js-json-mode))
 

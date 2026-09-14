@@ -46,8 +46,8 @@
 Comint handles the sudo password prompt, so it never touches disk."
   (let ((default-directory (nixcmds--flake-root)))
     (compile (format "%s%s %s --flake ."
-		     nixcmds-privilege-command basecommand subcommand)
-	     t)))
+                     nixcmds-privilege-command basecommand subcommand)
+             t)))
 
 ;;;###autoload
 (defun nixos-rebuild-switch ()

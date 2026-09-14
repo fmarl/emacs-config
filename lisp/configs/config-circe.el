@@ -7,21 +7,21 @@
   :defer t
   :config
   (setq circe-default-realname "fmarl"
-	circe-default-nick "fmarl"
-	circe-default-user "fmarl")
+        circe-default-nick "fmarl"
+        circe-default-user "fmarl")
   (setq circe-network-options
-	'(("OTW"
+        '(("OTW"
            :tls t
-	   :host "ircs.overthewire.org"
-	   :port 6697
+           :host "ircs.overthewire.org"
+           :port 6697
            )
-	  ("Furnet"
-	   :tls t
-	   :nick "PaX"
-	   :user "PaX"
-	   :realname "PaX"
-	   :host "alicorn.furnet.org"
-	   :port (6667 . 6697)
-	   :channels ("#pool")))))
+          ("Furnet"
+           :tls t
+           :nick "PaX"
+           :user "PaX"
+           :realname "PaX"
+           :host "alicorn.furnet.org"
+           :port (6667 . 6697)
+           :channels ("#pool")))))
 
 (provide 'config-circe)

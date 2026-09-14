@@ -8,7 +8,7 @@
   :init
   (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
   :hook ((python-base-mode . eglot-ensure)
-	 (python-base-mode . (lambda ()
+         (python-base-mode . (lambda ()
                                (setq tab-width 4)
                                (setq python-indent-offset 4)))))
 

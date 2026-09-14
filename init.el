@@ -127,8 +127,8 @@
 (add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
 
 (mapc #'require '(config-my config-keys config-ui config-editing config-minibuffer
-			    config-completion config-eglot config-org config-circe
-			    config-magit config-mu4e config-elfeed config-meow))
+                            config-completion config-eglot config-org config-circe
+                            config-magit config-mu4e config-elfeed config-meow))
 
 (when (eq system-type 'darwin)
   (require 'config-lex))

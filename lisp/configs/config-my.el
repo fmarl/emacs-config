@@ -3,10 +3,10 @@
 (defun my/enable-lang (lang)
   (interactive
    (list (completing-read
-	  "Lang: "
-	  (mapcar (lambda (file) (substring (file-name-base file) 5))
-		  (directory-files (expand-file-name "lisp/langs/" user-emacs-directory)
-				   nil "\\`lang-.*\\.el\\'")))))
+          "Lang: "
+          (mapcar (lambda (file) (substring (file-name-base file) 5))
+                  (directory-files (expand-file-name "lisp/langs/" user-emacs-directory)
+                                   nil "\\`lang-.*\\.el\\'")))))
   (require (intern (concat "lang-" lang)))
   (revert-buffer-quick))
 
@@ -29,11 +29,11 @@
 (defun my/lang-auto-enable ()
   "Load the lang module for the current major mode on first use."
   (when-let* ((lang (alist-get major-mode my/lang-mode-alist))
-	      (feature (intern (concat "lang-" lang))))
+              (feature (intern (concat "lang-" lang))))
     (unless (featurep feature)
       (require feature)
       (when buffer-file-name
-	(normal-mode)))))
+        (normal-mode)))))
 
 (add-hook 'after-change-major-mode-hook #'my/lang-auto-enable)
 

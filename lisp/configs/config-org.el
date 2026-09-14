@@ -16,14 +16,14 @@
          ("C-c l" . org-store-link))
   :config
   (setq org-hide-emphasis-markers t
-	org-pretty-entities t
-	org-startup-folded 'content
-	org-startup-with-inline-images t
-	org-image-actual-width '(400)
-	org-ellipsis " ▼ "
-	org-log-done 'time
-	org-log-into-drawer t
-	org-return-follows-link t)
+        org-pretty-entities t
+        org-startup-folded 'content
+        org-startup-with-inline-images t
+        org-image-actual-width '(400)
+        org-ellipsis " ▼ "
+        org-log-done 'time
+        org-log-into-drawer t
+        org-return-follows-link t)
   (setq org-todo-keywords
         '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)" "CANCELLED(c)")))
 

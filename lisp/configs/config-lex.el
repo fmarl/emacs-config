@@ -57,14 +57,14 @@
   (directory-file-name
    (expand-file-name
     (if-let* ((project (project-current)))
-	(project-root project)
+        (project-root project)
       default-directory))))
 
 (defun my/lx-claude--container ()
   "Container name of the current project's devcontainer.
 The launcher names containers lx-claude-devcontainer-<workspace-basename>."
   (concat "lx-claude-devcontainer-"
-	  (file-name-nondirectory (my/lx-claude--host-root))))
+          (file-name-nondirectory (my/lx-claude--host-root))))
 
 (defun my/lx-claude-container-prefix (buffer)
   "Run Claude Code agent/shell commands inside the project's devcontainer.
@@ -72,22 +72,22 @@ Other agents (pi) return nil and stay on the host."
   (when (eq (map-elt (agent-shell-get-config buffer) :identifier) 'claude-code)
     (with-current-buffer buffer
       (list "docker" "exec" "-i" "--user" "node" "-w" "/workspace"
-	    (my/lx-claude--container)))))
+            (my/lx-claude--container)))))
 
 (defun my/lx-claude-resolve-path (path)
   "Map paths between the host project root and the /workspace bind mount.
 Only for Claude Code sessions; pi paths pass through untouched."
   (let ((config (ignore-errors (agent-shell-get-config (current-buffer)))))
     (if (and path (eq (map-elt config :identifier) 'claude-code))
-	(let ((root (my/lx-claude--host-root))
-	      (path (expand-file-name path)))
-	  (cond ((equal path "/workspace") root)
-		((string-prefix-p "/workspace/" path)
-		 (concat root (substring path (length "/workspace"))))
-		((equal path root) "/workspace")
-		((string-prefix-p (concat root "/") path)
-		 (concat "/workspace" (substring path (length root))))
-		(t path)))
+        (let ((root (my/lx-claude--host-root))
+              (path (expand-file-name path)))
+          (cond ((equal path "/workspace") root)
+                ((string-prefix-p "/workspace/" path)
+                 (concat root (substring path (length "/workspace"))))
+                ((equal path root) "/workspace")
+                ((string-prefix-p (concat root "/") path)
+                 (concat "/workspace" (substring path (length root))))
+                (t path)))
       path)))
 
 (defun my/lx-claude--repo-targets ()
@@ -95,8 +95,8 @@ Only for Claude Code sessions; pi paths pass through untouched."
 Signals `user-error' when the container is not running."
   (with-temp-buffer
     (unless (zerop (call-process "docker" nil '(t nil) nil
-				 "exec" (my/lx-claude--container)
-				 "sh" "-c" "ls -d /repos* 2>/dev/null; exit 0"))
+                                 "exec" (my/lx-claude--container)
+                                 "sh" "-c" "ls -d /repos* 2>/dev/null; exit 0"))
       (user-error "Container %s is not running" (my/lx-claude--container)))
     (split-string (buffer-string) "\n" t)))
 
@@ -108,25 +108,25 @@ the launcher's -a mounts.  To pick up host-side changes, remove the snapshot
 via `my/lx-claude-remove-repo' and add it again."
   (interactive "DAdd repo to container: ")
   (let* ((container (my/lx-claude--container))
-	 (src (directory-file-name (expand-file-name dir)))
-	 (taken (my/lx-claude--repo-targets))
-	 (n 1)
-	 (target "/repos"))
+         (src (directory-file-name (expand-file-name dir)))
+         (taken (my/lx-claude--repo-targets))
+         (n 1)
+         (target "/repos"))
     (while (member target taken)
       (setq n (1+ n)
-	    target (format "/repos%d" n)))
+            target (format "/repos%d" n)))
     (let ((process
-	   (start-process-shell-command
-	    "lx-claude-add-repo" (get-buffer-create "*lx-claude-repos*")
-	    (format "docker cp %s %s:%s && docker exec -u root %s sh -c %s"
-		    (shell-quote-argument src)
-		    (shell-quote-argument container) target
-		    (shell-quote-argument container)
-		    (shell-quote-argument
-		     (format "chown -R root:root %s && chmod -R a-w %s" target target))))))
+           (start-process-shell-command
+            "lx-claude-add-repo" (get-buffer-create "*lx-claude-repos*")
+            (format "docker cp %s %s:%s && docker exec -u root %s sh -c %s"
+                    (shell-quote-argument src)
+                    (shell-quote-argument container) target
+                    (shell-quote-argument container)
+                    (shell-quote-argument
+                     (format "chown -R root:root %s && chmod -R a-w %s" target target))))))
       (set-process-sentinel process
-			    (lambda (_ event)
-			      (message "add-repo %s -> %s: %s" src target (string-trim event))))
+                            (lambda (_ event)
+                              (message "add-repo %s -> %s: %s" src target (string-trim event))))
       (message "Copying %s -> %s:%s ..." src container target))))
 
 (defun my/lx-claude-remove-repo (target)
@@ -141,11 +141,11 @@ in-container rm fails on them."
   (unless (string-match-p "\\`/repos[0-9]*\\'" target)
     (user-error "Refusing to delete %s" target))
   (let ((process (start-process "lx-claude-remove-repo" "*lx-claude-repos*"
-				"docker" "exec" "-u" "root" (my/lx-claude--container)
-				"rm" "-rf" "--one-file-system" target)))
+                                "docker" "exec" "-u" "root" (my/lx-claude--container)
+                                "rm" "-rf" "--one-file-system" target)))
     (set-process-sentinel process
-			  (lambda (_ event)
-			    (message "remove-repo %s: %s" target (string-trim event))))))
+                          (lambda (_ event)
+                            (message "remove-repo %s: %s" target (string-trim event))))))
 
 (use-package agent-shell
   :config
