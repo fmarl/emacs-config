@@ -16,9 +16,6 @@ dist/
 # Backup files
 *~
 
-# Undo-tree save-files
-*.~undo-tree
-
 # Generated directories
 auto-save-list/
 eln-cache/
@@ -33,11 +30,8 @@ elfeed/
 history
 places
 recentf
-*.eld
-smex-items
 tramp
 network-security.data
 .org-id-locations
 bookmarks
-org-roam.db
 projects
