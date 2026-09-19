@@ -14,15 +14,18 @@
   :hook (terraform-mode . eglot-ensure))
 
 (defun my/run-finalize ()
+  "Run tools/finalize of the current project on this file."
   (interactive)
-  (let* ((vuln (read-string "Vulnerable?: "))
-         (ignore (read-string "Ignore?: "))
-         (days (read-string "Days?: "))
-         (cmd (format "printf '%s\n%s\n%s\n' | %s/tools/finalize -file %s"
-                      vuln ignore days
-                      (project-root (project-current buffer-file-name))
-                      (shell-quote-argument (buffer-file-name)))))
-    (compile cmd)))
+  (let ((vuln (read-string "Vulnerable?: "))
+        (ignored (read-string "Ignore?: "))
+        (days (read-string "Days?: "))
+        (root (project-root (project-current t))))
+    (compile (format "printf '%%s\\n' %s %s %s | %s -file %s"
+                     (shell-quote-argument vuln)
+                     (shell-quote-argument ignored)
+                     (shell-quote-argument days)
+                     (shell-quote-argument (expand-file-name "tools/finalize" root))
+                     (shell-quote-argument (buffer-file-name))))))
 
 (defun my/magit/extract-jira-issue-from-branch ()
   "Extract a Jira Issue Key from the current branch."
