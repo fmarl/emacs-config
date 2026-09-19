@@ -3,12 +3,6 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-;; Let Emacs see nix-darwin executables
-(let* ((user (getenv "USER"))
-       (nix-path (concat "/etc/profiles/per-user/" user "/bin")))
-  (push nix-path exec-path)
-  (setenv "PATH" (concat nix-path ":" (getenv "PATH"))))
-
 ;; Some MacOS compatibility stuff
 (setq mac-command-modifier 'control)
 (setq mac-control-modifier 'super)
