@@ -3,12 +3,15 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-;; Some MacOS compatibility stuff
-(setq mac-command-modifier 'control)
-(setq mac-control-modifier 'super)
-(setq mac-option-modifier 'meta)
+;; Defined only in macOS builds; declared so this compiles everywhere.
+(defvar mac-command-modifier)
+(defvar mac-control-modifier)
+(defvar mac-option-modifier)
 
-;; Terraform
+(setq mac-command-modifier 'control
+      mac-control-modifier 'super
+      mac-option-modifier 'meta)
+
 (use-package terraform-mode
   :mode "\\.tf\\'"
   :hook (terraform-mode . eglot-ensure))
@@ -34,7 +37,7 @@
       (match-string 0 branch-name))))
 
 (defun my/magit/add-jira-issue-to-commit-msg ()
-  "Extract a Jira Issue Key from the current branch and insert it into the commit msg."
+  "Insert the Jira issue key of the current branch into the commit message."
   (let ((jira-issue (my/magit/extract-jira-issue-from-branch)))
     (when jira-issue
       (insert (format "%s " jira-issue)))))
