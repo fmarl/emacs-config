@@ -15,6 +15,9 @@
 
 (setq frame-resize-pixelwise t)
 
+(when (featurep 'native-compile)
+  (startup-redirect-eln-cache "~/.cache/emacs/eln-cache/"))
+
 ;; Disable UI elements before the first frame is drawn
 (push '(undecorated . t) default-frame-alist)
 (push '(menu-bar-lines . 0) default-frame-alist)
