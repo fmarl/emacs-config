@@ -18,8 +18,9 @@
 (when (featurep 'native-compile)
   (startup-redirect-eln-cache "~/.cache/emacs/eln-cache/"))
 
-;; Disable UI elements before the first frame is drawn
-(push '(undecorated . t) default-frame-alist)
+(unless (eq system-type 'darwin)
+  (push '(undecorated . t) default-frame-alist))
+
 (push '(menu-bar-lines . 0) default-frame-alist)
 (push '(tool-bar-lines . 0) default-frame-alist)
 (push '(vertical-scroll-bars) default-frame-alist)
