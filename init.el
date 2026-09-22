@@ -71,6 +71,17 @@
  savehist-file "~/.cache/emacs/history"
  save-place-file "~/.cache/emacs/places"
  recentf-save-file "~/.cache/emacs/recentf"
+ bookmark-default-file "~/.cache/emacs/bookmarks"
+ project-list-file "~/.cache/emacs/projects"
+ tramp-persistency-file-name "~/.cache/emacs/tramp"
+ nsm-settings-file "~/.cache/emacs/network-security.data"
+ org-id-locations-file "~/.cache/emacs/org-id-locations"
+ eshell-directory-name "~/.cache/emacs/eshell/"
+ transient-history-file "~/.cache/emacs/transient/history.el"
+ transient-levels-file "~/.cache/emacs/transient/levels.el"
+ transient-values-file "~/.cache/emacs/transient/values.el"
+ dirvish-cache-dir "~/.cache/emacs/dirvish/"
+ elfeed-db-directory "~/.cache/emacs/elfeed/"
 
  ;; both cleanups stat every entry, hanging on stale TRAMP paths
  recentf-auto-cleanup 'never
