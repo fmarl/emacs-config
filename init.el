@@ -134,6 +134,17 @@
 ;; Show the tab-bar as soon as tab-bar functions are invoked
 (setopt tab-bar-show 1)
 
+(setopt use-short-answers t
+        use-dialog-box nil
+        read-extended-command-predicate #'command-completion-default-include-p
+        vc-follow-symlinks t
+        backup-by-copying t
+        bookmark-save-flag 1
+        kill-do-not-save-duplicates t
+        save-interprogram-paste-before-kill t
+        treesit-font-lock-level 4)
+(global-so-long-mode)
+
 (add-to-list 'load-path (expand-file-name "lisp/langs/" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
 
