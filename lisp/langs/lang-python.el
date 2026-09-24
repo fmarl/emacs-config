@@ -14,6 +14,10 @@
   :init
   (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
   :hook ((python-base-mode . eglot-ensure)
-         (python-base-mode . my/python-indent-setup)))
+         (python-base-mode . my/python-indent-setup))
+  :config
+  (with-eval-after-load 'apheleia
+    (setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff)
+          (alist-get 'python-mode apheleia-mode-alist) '(ruff-isort ruff))))
 
 (provide 'lang-python)
