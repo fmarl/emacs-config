@@ -11,6 +11,10 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package editorconfig
+  :ensure nil
+  :config (editorconfig-mode))
+
 (use-package isearch
   :ensure nil
   :bind (:map isearch-mode-map
