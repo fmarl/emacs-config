@@ -33,6 +33,13 @@
   ;; apheleia defaults terraform-mode to opentofu
   (setf (alist-get 'terraform-mode apheleia-mode-alist) 'terraform))
 
+(use-package ediff
+  :ensure nil
+  :defer t
+  :custom
+  (ediff-window-setup-function #'ediff-setup-windows-plain)
+  (ediff-split-window-function #'split-window-horizontally))
+
 (use-package diff-hl
   :init (global-diff-hl-mode)
   :hook ((magit-pre-refresh . diff-hl-magit-pre-refresh)
