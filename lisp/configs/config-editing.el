@@ -11,6 +11,18 @@
 (use-package rainbow-delimiters
   :hook (prog-mode . rainbow-delimiters-mode))
 
+(use-package isearch
+  :ensure nil
+  :bind (:map isearch-mode-map
+              ("C-." . isearch-forward-thing-at-point))
+  :custom
+  (lazy-count-prefix-format "(%s/%s) ")
+  (isearch-lazy-count t)
+  (isearch-allow-motion t)
+  (isearch-allow-scroll t)
+  (isearch-repeat-on-direction-change t)
+  (isearch-wrap-pause 'no-ding))
+
 (use-package apheleia
   :init (apheleia-global-mode 1)
   :config

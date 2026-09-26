@@ -157,21 +157,6 @@
 (when (eq system-type 'darwin)
   (require 'config-lex))
 
-;; isearch is Emacs's built-in searching system
-(use-package isearch
-  :ensure nil                           ; already installed
-  :bind
-  (:map isearch-mode-map
-        ("C-." . isearch-forward-thing-at-point)) ; Search for thing under cursor
-  :custom
-  (lazy-count-prefix-format "(%s/%s) ")
-  (isearch-lazy-count t)                 ; show match count
-  (isearch-allow-motion t)
-  (isearch-allow-scroll t)               ; lets you scroll without breaking search
-  (isearch-repeat-on-direction-change t) ; C-r immediately goes to previous match
-  (isearch-wrap-pause 'no-ding)          ; Automatically wrap search to top
-  )
-
 ;; envrc needs to be enabled late in init
 (use-package envrc
   :config (envrc-global-mode 1))
