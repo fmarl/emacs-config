@@ -48,8 +48,6 @@
   :init (global-diff-hl-mode)
   :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
-(add-to-list 'auto-mode-alist '("\\.json\\'" . js-json-mode))
-
 (dolist (entry '((json "\\.json\\'" . json-ts-mode)
                  (toml "\\.toml\\'" . toml-ts-mode)
                  (yaml "\\.ya?ml\\'" . yaml-ts-mode)))
