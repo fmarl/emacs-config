@@ -150,9 +150,12 @@
 (add-to-list 'load-path (expand-file-name "lisp/langs/" user-emacs-directory))
 (add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
 
-(mapc #'require '(config-my config-keys config-ui config-editing config-minibuffer
-                            config-completion config-eglot config-org config-circe
-                            config-magit config-mu4e config-elfeed config-meow))
+(mapc #'require '(config-keys config-ui config-editing config-minibuffer
+                              config-completion config-eglot config-org config-circe
+                              config-magit config-mu4e config-elfeed config-meow
+                              lang-cc lang-clojure lang-elixir lang-gleam lang-go
+                              lang-haskell lang-java lang-nasm lang-nix lang-ocaml
+                              lang-python lang-rust lang-shell lang-zig))
 
 (when (eq system-type 'darwin)
   (require 'config-lex))

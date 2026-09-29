@@ -3,6 +3,6 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-(use-package gleam-ts-mode)
+(use-package gleam-ts-mode :mode "\\.gleam\\'")
 
 (provide 'lang-gleam)

@@ -4,13 +4,14 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 (use-package tuareg
-  :defer t
+  :mode (("\\.mlp?\\'" . tuareg-mode)
+         ("\\.mli\\'" . tuareg-interface-mode)
+         ("\\.ocamlinit\\'" . tuareg-mode))
   :hook (tuareg-mode . eglot-ensure))
 
 (use-package utop
-  :config
-  (add-hook 'tuareg-mode-hook #'utop-minor-mode))
+  :hook (tuareg-mode . utop-minor-mode))
 
-(use-package dune)
+(use-package dune :defer t)
 
 (provide 'lang-ocaml)
