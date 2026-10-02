@@ -3,8 +3,6 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-(global-set-key (kbd "C-x C-b") 'ibuffer)
-
 (use-package ef-themes
   :init
   (ef-themes-take-over-modus-themes-mode 1)
