@@ -22,22 +22,6 @@
   (setq dirvish-default-layout '(0 0.3 0.7)
         dirvish-attributes '(subtree-state collapse)))
 
-(setq eshell-prompt-function
-      (lambda ()
-        (let ((sh-level (- (string-to-number (getenv "SHLVL")) 1))
-              (aws-profile (getenv "AWS_PROFILE")))
-          (concat
-           (abbreviate-file-name default-directory)
-           " "
-           (if (> sh-level 0)
-               (concat "[" (number-to-string sh-level) "] ")
-             "")
-           (if (not (eq aws-profile nil))
-               (concat "[" aws-profile "] ")
-             "")
-           (if (= (user-uid) 0) "#" "λ")
-           " "))))
-
 (use-package ace-window :bind (("C-c w" . ace-window)))
 (use-package avy
   :bind (("M-g -" . avy-kill-region)
