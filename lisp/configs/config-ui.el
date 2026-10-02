@@ -4,12 +4,12 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 (use-package ef-themes
-  :init
-  (ef-themes-take-over-modus-themes-mode 1)
+  :demand t
   :bind
   (("M-<f5>" . modus-themes-rotate)
    ("C-<f5>" . modus-themes-select))
   :config
+  (ef-themes-take-over-modus-themes-mode 1)
   (modus-themes-load-theme 'ef-owl))
 
 (use-package which-key :config (which-key-mode))
