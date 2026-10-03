@@ -22,7 +22,9 @@
   (add-to-list 'completion-at-point-functions #'cape-file))
 
 (use-package yasnippet
-  :config (yas-global-mode 1))
+  :hook ((prog-mode text-mode) . yas-minor-mode)
+  :functions yas-reload-all
+  :config (yas-reload-all))
 
 (use-package yasnippet-snippets :after yasnippet)
 
