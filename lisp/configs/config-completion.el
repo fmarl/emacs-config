@@ -3,9 +3,10 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-(setopt enable-recursive-minibuffers t)                ; Use the minibuffer whilst in the minibuffer
-(setopt completion-cycle-threshold 1)                  ; TAB cycles candidates
-(setopt tab-always-indent 'complete)                   ; When I hit TAB, try to complete, otherwise, indent
+(setopt enable-recursive-minibuffers t)
+(setopt completion-cycle-threshold 1)
+(setopt tab-always-indent 'complete)
+(setopt text-mode-ispell-word-completion nil)
 
 (use-package corfu
   :init (global-corfu-mode)
