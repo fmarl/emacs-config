@@ -28,11 +28,7 @@
 
   (setq mu4e-compose-format-flowed nil
         mm-discouraged-alternatives '("text/html")
-        mu4e-compose-insert-old-message nil
         message-default-mail-headers "Content-Type: text/plain; charset=utf-8\n"
-        mu4e-compose-cite-style 'plain
-        mu4e-compose-quote-style 'plain
-        mu4e-compose-cite-function 'mu4e-compose-cite-original
         message-cite-reply-position 'below
         message-yank-prefix "> "
         message-yank-cited-prefix "> "
@@ -42,13 +38,11 @@
         message-fill-column 72
         message-signature nil
         mu4e-compose-reply-to-address user-mail-address
-        mu4e-compose-dont-reply-to-self t
-        mu4e-reply-keep-subject t)
+        mu4e-compose-dont-reply-to-self t)
 
   (add-hook 'message-mode-hook #'turn-on-auto-fill)
 
   (setq mu4e-use-fancy-chars nil
-        mu4e-view-show-images nil
         mu4e-view-show-addresses t
         mu4e-change-filenames-when-moving t)
 
