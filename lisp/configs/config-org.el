@@ -59,7 +59,8 @@
   :after org
   :hook (org-mode . org-modern-mode)
   :config
-  (setq org-modern-star '("◉" "○" "●" "◆" "◇" "▶")
+  (setq org-modern-star 'replace
+        org-modern-replace-stars '("◉" "○" "●" "◆" "◇" "▶")
         org-modern-table t
         org-modern-checkbox '((?X . "☑") (?- . "☒") (?\s . "☐"))
         org-modern-todo-faces
