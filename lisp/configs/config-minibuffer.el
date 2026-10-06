@@ -42,14 +42,13 @@
   :hook (completion-list-mode . consult-preview-at-point-mode)
   :init
   (advice-add #'register-preview :override #'consult-register-window)
-  (setq register-preview-delay 0.5
-        xref-show-xrefs-function #'consult-xref
-        xref-show-definitions-function #'consult-xref)
-
-  :config
-  (setq consult-narrow-key "<"
-        consult-ripgrep-args
-        "rg --null --line-buffered --color=never --max-columns=1000 --path-separator /\
+  :custom
+  (register-preview-delay 0.5)
+  (xref-show-xrefs-function #'consult-xref)
+  (xref-show-definitions-function #'consult-xref)
+  (consult-narrow-key "<")
+  (consult-ripgrep-args
+   "rg --null --line-buffered --color=never --max-columns=1000 --path-separator /\
  --smart-case --no-heading --with-filename --line-number --search-zip\
  --hidden --glob !.git/* --glob !.direnv/*"))
 
@@ -57,10 +56,10 @@
   :init (marginalia-mode))
 
 (use-package orderless
-  :init
-  (setq completion-styles '(orderless basic)
-        completion-category-defaults nil
-        completion-category-overrides '((file (styles basic partial-completion)))))
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-defaults nil)
+  (completion-category-overrides '((file (styles basic partial-completion)))))
 
 (use-package vertico
   :init (vertico-mode))
@@ -68,8 +67,8 @@
 (use-package embark
   :bind (("C-." . embark-act)
          ("C-h B" . embark-bindings))
-  :init
-  (setq prefix-help-command #'embark-prefix-help-command))
+  :custom
+  (prefix-help-command #'embark-prefix-help-command))
 
 (use-package embark-consult
   :after (embark consult)

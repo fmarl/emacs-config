@@ -5,14 +5,10 @@
 
 (use-package circe
   :defer t
-  :config
-  (setq circe-default-realname "fmarl"
-        circe-default-nick "fmarl"
-        circe-default-user "fmarl")
-  (setq circe-network-options
-        '(("OTW"
-           :tls t
-           :host "ircs.overthewire.org"
-           :port 6697))))
+  :custom
+  (circe-default-realname "fmarl")
+  (circe-default-nick "fmarl")
+  (circe-default-user "fmarl")
+  (circe-network-options '(("OTW" :tls t :host "ircs.overthewire.org" :port 6697))))
 
 (provide 'config-circe)
