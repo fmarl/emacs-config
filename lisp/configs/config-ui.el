@@ -3,14 +3,13 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-(use-package ef-themes
+(use-package modus-themes
   :demand t
   :bind
   (("M-<f5>" . modus-themes-rotate)
    ("C-<f5>" . modus-themes-select))
   :config
-  (ef-themes-take-over-modus-themes-mode 1)
-  (modus-themes-load-theme 'ef-owl))
+  (modus-themes-load-theme 'modus-operandi-tinted))
 
 (use-package which-key :config (which-key-mode))
 
