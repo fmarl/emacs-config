@@ -5,13 +5,10 @@
 
 (defun my/org-mode-setup ()
   "Prose-friendly buffer settings for Org."
-  (setq line-spacing 0.2)
-  (display-line-numbers-mode -1))
+  (setq-local line-spacing 0.2))
 
 (use-package org
-  :ensure nil
-  :hook ((org-mode . visual-line-mode)
-         (org-mode . variable-pitch-mode)
+  :hook ((org-mode . variable-pitch-mode)
          (org-mode . org-indent-mode)
          (org-mode . my/org-mode-setup))
   :bind (("C-c a" . org-agenda)
