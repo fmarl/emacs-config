@@ -67,7 +67,6 @@ Like `normal-backup-enable-predicate', but also reject secrets."
 
 (set-language-environment "UTF-8")
 (set-default-coding-systems 'utf-8)
-(add-to-list 'default-frame-alist '(font . "Aporetic Sans Mono 14"))
 
 (setq-default bidi-paragraph-direction 'left-to-right
               indent-tabs-mode nil)
