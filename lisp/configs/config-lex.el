@@ -30,6 +30,8 @@
 (defun my/run-finalize ()
   "Run tools/finalize of the current project on this file."
   (interactive)
+  (unless buffer-file-name
+    (user-error "Buffer is not visiting a file"))
   (let ((vuln (read-string "Vulnerable?: "))
         (ignored (read-string "Ignore?: "))
         (days (read-string "Days?: "))
@@ -39,7 +41,7 @@
                      (shell-quote-argument ignored)
                      (shell-quote-argument days)
                      (shell-quote-argument (expand-file-name "tools/finalize" root))
-                     (shell-quote-argument (buffer-file-name))))))
+                     (shell-quote-argument buffer-file-name)))))
 
 (defun my/magit/extract-jira-issue-from-branch ()
   "Extract a Jira Issue Key from the current branch."
