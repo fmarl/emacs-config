@@ -6,12 +6,18 @@
 (defun my/java-indent-setup ()
   "Indent with 4 spaces."
   (setq-local indent-tabs-mode nil
-              tab-width 4
-              c-basic-offset 4))
+              tab-width 4))
 
-(use-package cc-mode
-  :ensure nil
-  :hook (((java-mode java-ts-mode) . my/java-indent-setup)
-         ((java-mode java-ts-mode) . eglot-ensure)))
+(use-package java-ts-mode
+  :init
+  (add-to-list 'major-mode-remap-alist '(java-mode . java-ts-mode))
+  :hook ((java-ts-mode . my/java-indent-setup)
+         (java-ts-mode . eglot-ensure)))
+
+;; Re-enable per project in .dir-locals.el:
+;;   ((java-ts-mode . ((apheleia-formatter . google-java-format))))
+(with-eval-after-load 'apheleia
+  (setf (alist-get 'java-mode apheleia-mode-alist nil t) nil
+        (alist-get 'java-ts-mode apheleia-mode-alist nil t) nil))
 
 (provide 'lang-java)
