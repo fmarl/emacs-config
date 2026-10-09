@@ -120,7 +120,7 @@ Like `normal-backup-enable-predicate', but also reject secrets."
                               config-magit config-elfeed config-meow
                               lang-cc lang-clojure lang-elixir lang-gleam lang-go
                               lang-haskell lang-java lang-nasm lang-nix lang-ocaml
-                              lang-python lang-rust lang-shell lang-zig))
+                              lang-python lang-rust lang-shell lang-typescript lang-zig))
 
 (if (eq system-type 'darwin)
     (require 'config-lex)
