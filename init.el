@@ -78,11 +78,9 @@ Like `normal-backup-enable-predicate', but also reject secrets."
         window-combination-resize t
         split-window-preferred-direction 'longest
         sentence-end-double-space nil
-        line-number-mode t
         column-number-mode t
         mode-line-collapse-minor-modes nil
         display-line-numbers-width 3
-        show-trailing-whitespace nil
         indicate-buffer-boundaries 'left
         global-hl-line-sticky-flag 'window
         show-paren-delay 0
@@ -104,7 +102,6 @@ Like `normal-backup-enable-predicate', but also reject secrets."
 (pixel-scroll-precision-mode)
 (repeat-mode)
 (global-hl-line-mode)
-(show-paren-mode)
 (electric-pair-mode)
 (global-prettify-symbols-mode)
 (global-so-long-mode)
