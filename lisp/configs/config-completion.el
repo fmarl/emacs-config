@@ -19,8 +19,8 @@
 (use-package cape
   :after corfu
   :config
-  (add-to-list 'completion-at-point-functions #'cape-dabbrev)
-  (add-to-list 'completion-at-point-functions #'cape-file))
+  (add-hook 'completion-at-point-functions #'cape-dabbrev)
+  (add-hook 'completion-at-point-functions #'cape-file))
 
 (use-package yasnippet
   :hook ((prog-mode text-mode) . yas-minor-mode)
