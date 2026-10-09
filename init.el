@@ -95,7 +95,9 @@ Like `normal-backup-enable-predicate', but also reject secrets."
         bookmark-save-flag 1
         kill-do-not-save-duplicates t
         save-interprogram-paste-before-kill t
-        treesit-font-lock-level 4)
+        treesit-font-lock-level 4
+        ;; grammars come from Guix/Nix only
+        treesit-auto-install-grammar 'never)
 
 (global-auto-revert-mode)
 (blink-cursor-mode -1)
