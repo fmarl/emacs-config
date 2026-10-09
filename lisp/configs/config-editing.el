@@ -12,11 +12,9 @@
   :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package editorconfig
-  :ensure nil
   :config (editorconfig-mode))
 
 (use-package isearch
-  :ensure nil
   :bind (:map isearch-mode-map
               ("C-." . isearch-forward-thing-at-point))
   :custom
@@ -34,14 +32,12 @@
   (setf (alist-get 'terraform-mode apheleia-mode-alist) 'terraform))
 
 (use-package ediff
-  :ensure nil
   :defer t
   :custom
   (ediff-window-setup-function #'ediff-setup-windows-plain)
   (ediff-split-window-function #'split-window-horizontally))
 
 (use-package compile
-  :ensure nil
   :hook (compilation-filter . ansi-color-compilation-filter))
 
 (use-package diff-hl

@@ -9,7 +9,6 @@
               tab-width 8))
 
 (use-package go-ts-mode
-  :ensure nil
   :init
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
   (add-to-list 'auto-mode-alist '("/go\\.mod\\'" . go-mod-ts-mode))

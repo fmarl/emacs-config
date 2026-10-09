@@ -4,7 +4,6 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 (use-package sh-script
-  :ensure nil
   :init
   (add-to-list 'major-mode-remap-alist '(sh-mode . bash-ts-mode))
   :hook (bash-ts-mode . eglot-ensure))

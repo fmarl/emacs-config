@@ -10,7 +10,6 @@
               python-indent-offset 4))
 
 (use-package python
-  :ensure nil
   :init
   (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
   :hook ((python-base-mode . eglot-ensure)

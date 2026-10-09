@@ -4,7 +4,6 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 (use-package mu4e
-  :ensure nil
   :commands mu4e
   :hook (message-mode . turn-on-auto-fill)
   :custom

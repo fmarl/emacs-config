@@ -4,7 +4,6 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 (use-package cc-mode
-  :ensure nil
   :hook ((c-mode c++-mode) . eglot-ensure))
 
 (provide 'lang-cc)
