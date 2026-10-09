@@ -3,6 +3,17 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
+(dolist (dir (reverse
+              (list (expand-file-name "~/.local/bin")
+                    (concat "/etc/profiles/per-user/" (user-login-name) "/bin")
+                    "/run/current-system/sw/bin"
+                    "/nix/var/nix/profiles/default/bin"
+                    "/opt/homebrew/bin")))
+  (when (and (file-directory-p dir)
+             (not (member dir exec-path)))
+    (push dir exec-path)
+    (setenv "PATH" (concat dir ":" (getenv "PATH")))))
+
 ;; Defined only in macOS builds; declared so this compiles everywhere.
 (defvar mac-command-modifier)
 (defvar mac-control-modifier)
