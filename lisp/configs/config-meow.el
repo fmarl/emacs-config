@@ -3,7 +3,8 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-(defun meow-setup ()
+(defun my/meow-setup ()
+  "Configure Meow's states and QWERTY keymaps."
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
 
   (add-to-list 'meow-mode-state-list '(circe-mode . insert))
@@ -117,7 +118,7 @@
 
 (use-package meow
   :config
-  (meow-setup)
+  (my/meow-setup)
   (meow-global-mode 1))
 
 (provide 'config-meow)
