@@ -10,14 +10,19 @@
       use-package-always-ensure nil
       use-package-expand-minimally t)
 
+(defun my/secret-file-p (name)
+  "Return non-nil if NAME looks like it holds secrets."
+  (string-match-p "/\\.\\(aws\\|ssh\\|gnupg\\)/\\|/secrets/\\|\\.env\\(\\.[^/]*\\)?\\'" name))
+
 (defun my/backup-enable-p (name)
-  "Return non-nil unless NAME looks like it holds secrets."
+  "Return non-nil if NAME should be backed up.
+Like `normal-backup-enable-predicate', but also reject secrets."
   (and (normal-backup-enable-predicate name)
-       (not (string-match-p "/\\.\\(aws\\|ssh\\|gnupg\\)/\\|/secrets/\\|\\.env\\(\\.[^/]*\\)?\\'" name))))
+       (not (my/secret-file-p name))))
 
 (defun my/disable-auto-save-for-secrets ()
-  "Turn off auto-save for files `my/backup-enable-p' rejects."
-  (unless (my/backup-enable-p buffer-file-name)
+  "Turn off auto-save if the visited file looks like it holds secrets."
+  (when (my/secret-file-p buffer-file-name)
     (auto-save-mode -1)))
 
 (setq
