@@ -130,7 +130,6 @@ Like `normal-backup-enable-predicate', but also reject secrets."
 (use-package envrc
   :config (envrc-global-mode))
 
-(when (file-exists-p custom-file)
-  (load custom-file))
+(load custom-file 'noerror)
 
 (provide 'init)
