@@ -53,9 +53,11 @@ Return nil on a detached HEAD."
       (match-string 0 branch-name))))
 
 (defun my/magit/add-jira-issue-to-commit-msg ()
-  "Insert the Jira issue key of the current branch into the commit message."
+  "Insert the Jira issue key of the current branch into the commit message.
+Do nothing if the message already starts with it, as when amending."
   (let ((jira-issue (my/magit/extract-jira-issue-from-branch)))
-    (when jira-issue
+    (when (and jira-issue
+               (not (looking-at-p (regexp-quote jira-issue))))
       (insert (format "%s " jira-issue)))))
 
 (add-hook 'git-commit-setup-hook #'my/magit/add-jira-issue-to-commit-msg)
