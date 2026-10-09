@@ -48,10 +48,8 @@
   :init (global-diff-hl-mode)
   :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
-(dolist (entry '((json "\\.json\\'" . json-ts-mode)
-                 (toml "\\.toml\\'" . toml-ts-mode)
-                 (yaml "\\.ya?ml\\'" . yaml-ts-mode)))
-  (when (treesit-language-available-p (car entry))
-    (add-to-list 'auto-mode-alist (cdr entry))))
+(add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.toml\\'" . toml-ts-mode))
+(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
 
 (provide 'config-editing)
