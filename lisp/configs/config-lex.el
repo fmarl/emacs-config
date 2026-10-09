@@ -44,9 +44,12 @@
                      (shell-quote-argument buffer-file-name)))))
 
 (defun my/magit/extract-jira-issue-from-branch ()
-  "Extract a Jira Issue Key from the current branch."
-  (let ((branch-name (magit-get-current-branch)))
-    (when (string-match "\\`\\([A-Z]+-[0-9]+\\)" branch-name)
+  "Extract a Jira Issue Key from the current branch.
+Return nil on a detached HEAD."
+  (let ((branch-name (magit-get-current-branch))
+        (case-fold-search nil))
+    (when (and branch-name
+               (string-match "\\`[A-Z]+-[0-9]+" branch-name))
       (match-string 0 branch-name))))
 
 (defun my/magit/add-jira-issue-to-commit-msg ()
