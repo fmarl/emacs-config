@@ -16,18 +16,18 @@
               ("C-c e r" . eglot-rename))
   :config
   (let ((inlay-hints '(:includeInlayParameterNameHints "all"
-                       :includeInlayFunctionParameterTypeHints t
-                       :includeInlayVariableTypeHints t
-                       :includeInlayPropertyDeclarationTypeHints t
-                       :includeInlayFunctionLikeReturnTypeHints t
-                       :includeInlayEnumMemberValueHints t)))
+                                                       :includeInlayFunctionParameterTypeHints t
+                                                       :includeInlayVariableTypeHints t
+                                                       :includeInlayPropertyDeclarationTypeHints t
+                                                       :includeInlayFunctionLikeReturnTypeHints t
+                                                       :includeInlayEnumMemberValueHints t)))
     (setq-default
      eglot-workspace-configuration
      `(:gopls (:staticcheck t :gofumpt :json-false)
-       :basedpyright (:analysis (:typeCheckingMode "standard"))
-       :nil (:formatting (:command ["nixfmt"]))
-       :typescript (:inlayHints ,inlay-hints)
-       :javascript (:inlayHints ,inlay-hints)))))
+              :basedpyright (:analysis (:typeCheckingMode "standard"))
+              :nil (:formatting (:command ["nixfmt"]))
+              :typescript (:inlayHints ,inlay-hints)
+              :javascript (:inlayHints ,inlay-hints)))))
 
 (use-package consult-eglot
   :after eglot
