@@ -32,6 +32,7 @@ places
 recentf
 tramp
 network-security.data
+*.eld
 .org-id-locations
 bookmarks
 projects

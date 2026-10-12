@@ -12,6 +12,7 @@
   (mu4e-get-mail-command "mbsync -a")
   (mu4e-update-interval 300)
   (mu4e-headers-auto-update t)
+  (mu4e-notification-support t)
   (mu4e-headers-date-format "%Y-%m-%d %H:%M")
   (mu4e-headers-fields '((:date . 20) (:flags . 6) (:from . 22) (:subject)))
   (mu4e-search-include-related t)

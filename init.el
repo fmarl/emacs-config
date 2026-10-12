@@ -124,7 +124,7 @@ Like `normal-backup-enable-predicate', but also reject secrets."
 
 (if (eq system-type 'darwin)
     (require 'config-lex)
-  (require 'config-mu4e))
+  (mapc #'require '(config-mu4e config-notify)))
 
 ;; envrc needs to be enabled late in init
 (use-package envrc
