@@ -3,6 +3,27 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
+(defun my/kill-region-or-line (arg)
+  "Kill the active region, or ARG whole lines if none is active."
+  (interactive "p")
+  (if (use-region-p)
+      (kill-region (region-beginning) (region-end))
+    (kill-whole-line arg)))
+
+(defun my/copy-region-or-line (arg)
+  "Copy the active region, or ARG lines if none is active."
+  (interactive "p")
+  (if (use-region-p)
+      (kill-ring-save (region-beginning) (region-end))
+    (kill-ring-save (line-beginning-position)
+                    (line-beginning-position (1+ arg)))))
+
+(keymap-global-set "C-w" #'my/kill-region-or-line)
+(keymap-global-set "M-w" #'my/copy-region-or-line)
+
+(use-package avy
+  :bind ("M-j" . avy-goto-char-timer))
+
 (use-package markdown-mode :mode "\\.md\\'")
 
 (use-package paredit

@@ -117,7 +117,7 @@ Like `normal-backup-enable-predicate', but also reject secrets."
 
 (mapc #'require '(config-keys config-ui config-editing config-minibuffer
                               config-completion config-eglot config-org config-circe
-                              config-magit config-elfeed config-meow
+                              config-magit config-elfeed
                               lang-cc lang-clojure lang-elixir lang-gleam lang-go
                               lang-haskell lang-java lang-nasm lang-nix lang-ocaml
                               lang-python lang-rust lang-shell lang-typescript lang-zig))

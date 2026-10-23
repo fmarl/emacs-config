@@ -3,36 +3,32 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
+(require 'filenotify)
+(require 'xdg)
+
 (use-package modus-themes
   :demand t
   :bind
   (("M-<f5>" . modus-themes-rotate)
-   ("C-<f5>" . modus-themes-select))
-  :custom
-  (modus-themes-to-toggle '(modus-operandi-tinted ef-owl)))
+   ("C-<f5>" . modus-themes-select)))
 
-(use-package ef-themes :demand t)
+(defvar my/theme-file (expand-file-name "theme" (xdg-config-home)))
 
-(defun my/load-appearance-theme (appearance)
-  "Load the dark or light theme of `modus-themes-to-toggle' for APPEARANCE.
-Fall back to the light one when the dark theme is not installed."
-  (pcase-let ((`(,light ,dark) modus-themes-to-toggle))
-    (modus-themes-load-theme
-     (if (and (eq appearance 'dark) (memq dark (custom-available-themes)))
-         dark
-       light))))
+(defun my/load-file-theme (&rest _)
+  "Load the theme named in `my/theme-file'."
+  (when-let* ((name (ignore-errors
+                      (with-temp-buffer
+                        (insert-file-contents my/theme-file)
+                        (string-trim (buffer-string)))))
+              (theme (intern-soft name))
+              ((memq theme (custom-available-themes))))
+    (unless (custom-theme-enabled-p theme)
+      (modus-themes-load-theme theme))))
 
-(require 'xdg)
+(my/load-file-theme)
 
-(let ((file (expand-file-name "theme" (xdg-config-home))))
-  (if (file-readable-p file)
-      (modus-themes-load-theme (with-temp-buffer
-                                 (insert-file-contents file)
-                                 (read (current-buffer))))
-    (my/load-appearance-theme (bound-and-true-p ns-system-appearance))
-    (when (boundp 'ns-system-appearance-change-functions)
-      (add-hook 'ns-system-appearance-change-functions
-                #'my/load-appearance-theme))))
+(when (file-exists-p my/theme-file)
+  (file-notify-add-watch my/theme-file '(change) #'my/load-file-theme))
 
 (use-package which-key :config (which-key-mode))
 
