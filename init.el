@@ -11,17 +11,13 @@
       use-package-expand-minimally t)
 
 (defun my/secret-file-p (name)
-  "Return non-nil if NAME looks like it holds secrets."
   (string-match-p "/\\.\\(aws\\|ssh\\|gnupg\\)/\\|/secrets/\\|\\.env\\(\\.[^/]*\\)?\\'" name))
 
 (defun my/backup-enable-p (name)
-  "Return non-nil if NAME should be backed up.
-Like `normal-backup-enable-predicate', but also reject secrets."
   (and (normal-backup-enable-predicate name)
        (not (my/secret-file-p name))))
 
 (defun my/disable-auto-save-for-secrets ()
-  "Turn off auto-save if the visited file looks like it holds secrets."
   (when (my/secret-file-p buffer-file-name)
     (auto-save-mode -1)))
 
@@ -32,13 +28,8 @@ Like `normal-backup-enable-predicate', but also reject secrets."
  load-prefer-newer t
  epg-pinentry-mode 'loopback
  network-security-level 'high
-
- ;; strip User-Agent/OS/version info, reject cookies
  url-privacy-level 'paranoid
-
- ;; never fetch remote images in shr buffers (elfeed, eww, HTML mail)
  shr-inhibit-images t
-
  backup-directory-alist '((".*" . "~/.cache/emacs/backups/"))
  backup-enable-predicate #'my/backup-enable-p
  auto-save-file-name-transforms '((".*" "~/.cache/emacs/auto-save/" t))
@@ -59,7 +50,6 @@ Like `normal-backup-enable-predicate', but also reject secrets."
  elfeed-db-directory "~/.cache/emacs/elfeed/"
  custom-file (expand-file-name "custom.el" user-emacs-directory)
 
- ;; both cleanups stat every entry, hanging on stale TRAMP paths
  recentf-auto-cleanup 'never
  save-place-forget-unreadable-files nil)
 
@@ -96,7 +86,6 @@ Like `normal-backup-enable-predicate', but also reject secrets."
         kill-do-not-save-duplicates t
         save-interprogram-paste-before-kill t
         treesit-font-lock-level 4
-        ;; grammars come from Guix/Nix only
         treesit-auto-install-grammar 'never)
 
 (global-auto-revert-mode)
@@ -126,7 +115,6 @@ Like `normal-backup-enable-predicate', but also reject secrets."
     (require 'config-lex)
   (mapc #'require '(config-mu4e config-notify)))
 
-;; envrc needs to be enabled late in init
 (use-package envrc
   :config (envrc-global-mode))
 

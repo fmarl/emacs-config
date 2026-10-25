@@ -51,11 +51,7 @@
   (format "%02d:%02d" (/ minutes 60) (mod minutes 60)))
 
 (defun worktime--resolve-start (hour minute)
-  "Return the timestamp of the start time HOUR:MINUTE.
-This is the next occurrence of HOUR:MINUTE if it is at most
-`worktime--max-start-lead' seconds away, and the most recent one
-otherwise.  So 09:00 entered at 08:30 is today, and 22:00 entered at
-00:30 is yesterday."
+  "Return the timestamp of the start time HOUR:MINUTE."
   (let* ((now (current-time))
          (decoded (decode-time now))
          (day (* 24 60 60)))

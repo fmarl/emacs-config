@@ -14,7 +14,6 @@
     (push dir exec-path)
     (setenv "PATH" (concat dir ":" (getenv "PATH")))))
 
-;; Defined only in macOS builds; declared so this compiles everywhere.
 (defvar mac-command-modifier)
 (defvar mac-control-modifier)
 (defvar mac-option-modifier)
@@ -28,7 +27,6 @@
   :hook (terraform-mode . eglot-ensure))
 
 (defun my/run-finalize ()
-  "Run tools/finalize of the current project on this file."
   (interactive)
   (unless buffer-file-name
     (user-error "Buffer is not visiting a file"))
@@ -44,8 +42,6 @@
                      (shell-quote-argument buffer-file-name)))))
 
 (defun my/magit/extract-jira-issue-from-branch ()
-  "Extract a Jira Issue Key from the current branch.
-Return nil on a detached HEAD."
   (let ((branch-name (magit-get-current-branch))
         (case-fold-search nil))
     (when (and branch-name
@@ -53,8 +49,6 @@ Return nil on a detached HEAD."
       (match-string 0 branch-name))))
 
 (defun my/magit/add-jira-issue-to-commit-msg ()
-  "Insert the Jira issue key of the current branch into the commit message.
-Do nothing if the message already starts with it, as when amending."
   (let ((jira-issue (my/magit/extract-jira-issue-from-branch)))
     (when (and jira-issue
                (not (looking-at-p (regexp-quote jira-issue))))

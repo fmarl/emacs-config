@@ -4,11 +4,9 @@
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
 (defun my/go-indent-setup ()
-  "Indent with tabs, as gofmt does."
   (setq-local indent-tabs-mode t
               tab-width 8))
 
-;; go-dlv loads go-mode, which claims .go and go.mod for itself
 (use-package go-dlv
   :commands (dlv dlv-current-func))
 
