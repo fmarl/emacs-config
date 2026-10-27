@@ -9,6 +9,12 @@
 ;; Keywords: tools
 ;; URL: https://github.com/fmarl/worktime.el
 
+;;; Commentary:
+
+;; `worktime-start' records when the working day began and enables
+;; `worktime-mode', which shows the remaining time and the end of the
+;; day in the mode line, updated once per minute.
+
 ;;; Code:
 
 (defgroup worktime nil

@@ -3,6 +3,10 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
+;;; Code:
+
+(require 'my-cache)
+
 (defun my/org-mode-setup ()
   "Prose-friendly buffer settings for Org."
   (setq-local line-spacing 0.2))
@@ -26,8 +30,8 @@
   (org-return-follows-link t)
   (org-todo-keywords '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)" "CANCELLED(c)")))
   (org-directory "~/org/")
-  (org-agenda-files '("~/org/inbox.org" "~/org/tasks.org"))
-  (org-default-notes-file "~/org/inbox.org")
+  (org-agenda-files '("inbox.org" "tasks.org"))
+  (org-id-locations-file (my/cache-file "org-id-locations"))
   (org-capture-templates
    '(("t" "Task" entry (file "inbox.org")
       "* TODO %?\n:PROPERTIES:\n:CREATED: %U\n:END:")
@@ -48,7 +52,6 @@
                   ((org-agenda-overriding-header "Unscheduled"))))))))
 
 (use-package org-modern
-  :after org
   :hook (org-mode . org-modern-mode)
   :custom
   (org-modern-star 'replace)
@@ -56,10 +59,10 @@
   (org-modern-table t)
   (org-modern-checkbox '((?X . "☑") (?- . "☒") (?\s . "☐")))
   (org-modern-todo-faces
-   '(("TODO" . (:foreground "#d67869" :weight bold))
-     ("IN-PROGRESS" . (:foreground "#c09f6f" :weight bold))
-     ("DONE" . (:foreground "#70bb70" :weight bold))
-     ("CANCELLED" . (:foreground "#857f8f" :weight normal)))))
+   '(("TODO" . error)
+     ("IN-PROGRESS" . warning)
+     ("DONE" . success)
+     ("CANCELLED" . shadow))))
 
 (use-package denote
   :hook (dired-mode . denote-dired-mode)
@@ -76,3 +79,5 @@
   (denote-rename-buffer-mode))
 
 (provide 'config-org)
+
+;;; config-org.el ends here

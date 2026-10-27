@@ -3,16 +3,19 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-(dolist (dir (reverse
-              (list (expand-file-name "~/.local/bin")
-                    (concat "/etc/profiles/per-user/" (user-login-name) "/bin")
-                    "/run/current-system/sw/bin"
-                    "/nix/var/nix/profiles/default/bin"
-                    "/opt/homebrew/bin")))
-  (when (and (file-directory-p dir)
-             (not (member dir exec-path)))
-    (push dir exec-path)
-    (setenv "PATH" (concat dir ":" (getenv "PATH")))))
+;;; Code:
+
+(let* ((dirs (seq-filter #'file-directory-p
+                         (list (expand-file-name "~/.local/bin")
+                               (file-name-concat "/etc/profiles/per-user"
+                                                 (user-login-name) "bin")
+                               "/run/current-system/sw/bin"
+                               "/nix/var/nix/profiles/default/bin"
+                               "/opt/homebrew/bin")))
+       (path (seq-uniq (append dirs (split-string (getenv "PATH")
+                                                  path-separator t)))))
+  (setenv "PATH" (string-join path path-separator))
+  (setq exec-path (append path (list exec-directory))))
 
 (defvar mac-command-modifier)
 (defvar mac-control-modifier)
@@ -25,6 +28,11 @@
 (use-package terraform-mode
   :mode "\\.tf\\'"
   :hook (terraform-mode . eglot-ensure))
+
+;; apheleia defaults terraform-mode to opentofu
+(defvar apheleia-mode-alist)
+(with-eval-after-load 'apheleia
+  (setf (alist-get 'terraform-mode apheleia-mode-alist) 'terraform))
 
 (defun my/run-finalize ()
   (interactive)
@@ -41,23 +49,26 @@
                      (shell-quote-argument (expand-file-name "tools/finalize" root))
                      (shell-quote-argument buffer-file-name)))))
 
-(defun my/magit/extract-jira-issue-from-branch ()
-  (let ((branch-name (magit-get-current-branch))
-        (case-fold-search nil))
-    (when (and branch-name
-               (string-match "\\`[A-Z]+-[0-9]+" branch-name))
-      (match-string 0 branch-name))))
+(declare-function magit-get-current-branch "magit-git")
 
-(defun my/magit/add-jira-issue-to-commit-msg ()
-  (let ((jira-issue (my/magit/extract-jira-issue-from-branch)))
-    (when (and jira-issue
-               (not (looking-at-p (regexp-quote jira-issue))))
-      (insert (format "%s " jira-issue)))))
+(defun my/current-jira-issue ()
+  (when-let* ((branch (magit-get-current-branch))
+              ((let ((case-fold-search nil))
+                 (string-match "\\`[A-Z]+-[0-9]+" branch))))
+    (match-string 0 branch)))
 
-(add-hook 'git-commit-setup-hook #'my/magit/add-jira-issue-to-commit-msg)
+(defun my/git-commit-insert-jira-issue ()
+  (when-let* (((looking-at-p "$"))
+              (issue (my/current-jira-issue)))
+    (insert issue " ")))
+
+(add-hook 'git-commit-setup-hook #'my/git-commit-insert-jira-issue)
 
 (use-package worktime
   :load-path "lisp/worktime/"
+  :functions worktime-mode
   :config (worktime-mode))
 
 (provide 'config-lex)
+
+;;; config-lex.el ends here

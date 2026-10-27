@@ -3,10 +3,12 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-(setopt enable-recursive-minibuffers t)
-(setopt completion-cycle-threshold 1)
-(setopt tab-always-indent 'complete)
-(setopt text-mode-ispell-word-completion nil)
+;;; Code:
+
+(setopt enable-recursive-minibuffers t
+        completion-cycle-threshold 1
+        tab-always-indent 'complete
+        text-mode-ispell-word-completion nil)
 
 (use-package corfu
   :init (global-corfu-mode)
@@ -30,3 +32,5 @@
 (use-package yasnippet-snippets :after yasnippet)
 
 (provide 'config-completion)
+
+;;; config-completion.el ends here

@@ -3,6 +3,8 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
+;;; Code:
+
 (use-package consult
   :bind (("C-c b" . consult-buffer)
          ("C-c r" . consult-ripgrep)
@@ -48,9 +50,10 @@
   (xref-show-definitions-function #'consult-xref)
   (consult-narrow-key "<")
   (consult-ripgrep-args
-   "rg --null --line-buffered --color=never --max-columns=1000 --path-separator /\
- --smart-case --no-heading --with-filename --line-number --search-zip\
- --hidden --glob !.git/* --glob !.direnv/*"))
+   '("rg" "--null" "--line-buffered" "--color=never" "--max-columns=1000"
+     "--path-separator" "/" "--smart-case" "--no-heading" "--with-filename"
+     "--line-number" "--search-zip" "--hidden"
+     "--glob" "!.git/*" "--glob" "!.direnv/*")))
 
 (use-package marginalia
   :init (marginalia-mode))
@@ -77,3 +80,5 @@
 (use-package wgrep :defer t)
 
 (provide 'config-minibuffer)
+
+;;; config-minibuffer.el ends here

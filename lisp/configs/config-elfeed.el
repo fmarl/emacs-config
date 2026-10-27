@@ -3,9 +3,14 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
+;;; Code:
+
+(require 'my-cache)
+
 (use-package elfeed
   :defer t
   :custom
+  (elfeed-db-directory (my/cache-file "elfeed/"))
   (elfeed-feeds
    '(("https://danluu.com/atom.xml" eng)
      ("https://jvns.ca/atom.xml" eng)
@@ -49,3 +54,5 @@
      ("https://risky.biz/feeds/risky-business-news/" news security))))
 
 (provide 'config-elfeed)
+
+;;; config-elfeed.el ends here

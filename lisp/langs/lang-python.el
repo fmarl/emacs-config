@@ -3,20 +3,15 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-(defun my/python-indent-setup ()
-  "Indent with 4 spaces."
-  (setq-local indent-tabs-mode nil
-              tab-width 4
-              python-indent-offset 4))
+;;; Code:
 
 (use-package python
-  :init
-  (add-to-list 'major-mode-remap-alist '(python-mode . python-ts-mode))
-  :hook ((python-base-mode . eglot-ensure)
-         (python-base-mode . my/python-indent-setup))
-  :config
-  (with-eval-after-load 'apheleia
-    (setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff)
-          (alist-get 'python-mode apheleia-mode-alist) '(ruff-isort ruff))))
+  :hook (python-base-mode . eglot-ensure))
+
+(defvar apheleia-mode-alist)
+(with-eval-after-load 'apheleia
+  (setf (alist-get 'python-ts-mode apheleia-mode-alist) '(ruff-isort ruff)))
 
 (provide 'lang-python)
+
+;;; lang-python.el ends here

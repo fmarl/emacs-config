@@ -3,36 +3,3 @@
 
 # Custom variables
 custom.el
-
-# Packaging
-.cask/
-.eask/
-.eldev/
-.keg/
-
-# Built distribution
-dist/
-
-# Backup files
-*~
-
-# Generated directories
-auto-save-list/
-eln-cache/
-elpa/
-snippets/
-transient/
-eshell/
-dirvish/
-elfeed/
-
-# Generated files
-history
-places
-recentf
-tramp
-network-security.data
-*.eld
-.org-id-locations
-bookmarks
-projects

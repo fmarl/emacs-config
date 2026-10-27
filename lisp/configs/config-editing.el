@@ -3,28 +3,27 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
+;;; Code:
+
 (defun my/kill-region-or-line (arg)
   "Kill the active region, or ARG whole lines if none is active."
   (interactive "p")
   (if (use-region-p)
-      (kill-region (region-beginning) (region-end))
+      (kill-region nil nil t)
     (kill-whole-line arg)))
 
 (defun my/copy-region-or-line (arg)
   "Copy the active region, or ARG lines if none is active."
   (interactive "p")
   (if (use-region-p)
-      (kill-ring-save (region-beginning) (region-end))
+      (kill-ring-save nil nil t)
     (kill-ring-save (line-beginning-position)
                     (line-beginning-position (1+ arg)))))
 
 (keymap-global-set "C-w" #'my/kill-region-or-line)
 (keymap-global-set "M-w" #'my/copy-region-or-line)
 
-(use-package avy
-  :bind ("M-j" . avy-goto-char-timer))
-
-(use-package markdown-mode :mode "\\.md\\'")
+(use-package markdown-mode :defer t)
 
 (use-package paredit
   :hook ((emacs-lisp-mode lisp-mode scheme-mode clojure-mode) . paredit-mode))
@@ -47,10 +46,7 @@
   (isearch-wrap-pause 'no-ding))
 
 (use-package apheleia
-  :init (apheleia-global-mode 1)
-  :config
-  ;; apheleia defaults terraform-mode to opentofu
-  (setf (alist-get 'terraform-mode apheleia-mode-alist) 'terraform))
+  :init (apheleia-global-mode 1))
 
 (use-package ediff
   :defer t
@@ -65,8 +61,6 @@
   :init (global-diff-hl-mode)
   :hook (magit-post-refresh . diff-hl-magit-post-refresh))
 
-(add-to-list 'auto-mode-alist '("\\.json\\'" . json-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.toml\\'" . toml-ts-mode))
-(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-ts-mode))
-
 (provide 'config-editing)
+
+;;; config-editing.el ends here

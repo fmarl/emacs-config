@@ -3,6 +3,11 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
+;;; Code:
+
+(setopt user-full-name "Florian Marrero Liestmann"
+        user-mail-address "f.m.liestmann@fx-ttr.de")
+
 (use-package mu4e
   :commands mu4e
   :custom
@@ -15,6 +20,7 @@
   (mu4e-headers-date-format "%Y-%m-%d %H:%M")
   (mu4e-headers-fields '((:date . 20) (:flags . 6) (:from . 22) (:subject)))
   (mu4e-change-filenames-when-moving t)
+  (mu4e-trash-without-flag t)
   (mu4e-sent-folder "/Sent")
   (mu4e-drafts-folder "/Drafts")
   (mu4e-trash-folder "/Trash")
@@ -27,17 +33,13 @@
                             (:maildir "/guix-devel" :key ?g)
                             (:maildir "/oss-security" :key ?o)))
   :config
-  (setq mu4e-trash-without-flag t))
+  (setopt mail-user-agent 'mu4e-user-agent))
 
 (use-package message
   :defer t
-  :init (setq mail-user-agent 'mu4e-user-agent)
   :hook ((message-mode . turn-on-auto-fill)
          (message-setup . mml-secure-message-sign-pgpmime))
   :custom
-  (user-full-name "Florian Marrero Liestmann")
-  (user-mail-address "f.m.liestmann@fx-ttr.de")
-  (message-dont-reply-to-names '("f\\.m\\.liestmann@fx-ttr\\.de"))
   (message-send-mail-function #'message-send-mail-with-sendmail)
   (sendmail-program "msmtp")
   (message-citation-line-function #'message-insert-formatted-citation-line)
@@ -47,3 +49,5 @@
   (mm-discouraged-alternatives '("text/html")))
 
 (provide 'config-mu4e)
+
+;;; config-mu4e.el ends here

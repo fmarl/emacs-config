@@ -3,15 +3,26 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
-(add-to-list 'load-path (expand-file-name "lisp/langs/" user-emacs-directory))
-(add-to-list 'load-path (expand-file-name "lisp/configs/" user-emacs-directory))
+;;; Code:
 
-(setq package-archives nil
-      use-package-always-ensure nil
-      use-package-expand-minimally t)
+(require 'use-package)
+(require 'my-cache)
+
+(setq package-archives nil)
+(setopt use-package-expand-minimally t)
+
+(set-language-environment "UTF-8")
+
+(setq-default bidi-paragraph-direction 'left-to-right)
+(setq bidi-inhibit-bpa t)
 
 (defun my/secret-file-p (name)
-  (string-match-p "/\\.\\(aws\\|ssh\\|gnupg\\)/\\|/secrets/\\|\\.env\\(\\.[^/]*\\)?\\'" name))
+  (string-match-p
+   (rx (or (seq "/." (or "aws" "gnupg" "kube" "password-store" "ssh") "/")
+           "/secrets/"
+           (seq "/." (or "authinfo" "netrc") (? ".gpg") eos)
+           (seq ".env" (? "." (* (not "/"))) eos)))
+   name))
 
 (defun my/backup-enable-p (name)
   (and (normal-backup-enable-predicate name)
@@ -21,55 +32,23 @@
   (when (my/secret-file-p buffer-file-name)
     (auto-save-mode -1)))
 
-(setq
- read-process-output-max (* 1024 1024)
- inhibit-startup-screen t
- ring-bell-function 'ignore
- load-prefer-newer t
- epg-pinentry-mode 'loopback
- network-security-level 'high
- url-privacy-level 'paranoid
- shr-inhibit-images t
- backup-directory-alist '((".*" . "~/.cache/emacs/backups/"))
- backup-enable-predicate #'my/backup-enable-p
- auto-save-file-name-transforms '((".*" "~/.cache/emacs/auto-save/" t))
- auto-save-list-file-prefix "~/.cache/emacs/auto-save/.saves-"
- savehist-file "~/.cache/emacs/history"
- save-place-file "~/.cache/emacs/places"
- recentf-save-file "~/.cache/emacs/recentf"
- bookmark-default-file "~/.cache/emacs/bookmarks"
- project-list-file "~/.cache/emacs/projects"
- tramp-persistency-file-name "~/.cache/emacs/tramp"
- nsm-settings-file "~/.cache/emacs/network-security.data"
- org-id-locations-file "~/.cache/emacs/org-id-locations"
- eshell-directory-name "~/.cache/emacs/eshell/"
- transient-history-file "~/.cache/emacs/transient/history.el"
- transient-levels-file "~/.cache/emacs/transient/levels.el"
- transient-values-file "~/.cache/emacs/transient/values.el"
- dirvish-cache-dir "~/.cache/emacs/dirvish/"
- elfeed-db-directory "~/.cache/emacs/elfeed/"
- custom-file (expand-file-name "custom.el" user-emacs-directory)
+(add-hook 'find-file-hook #'my/disable-auto-save-for-secrets)
 
- recentf-auto-cleanup 'never
- save-place-forget-unreadable-files nil)
-
-(make-directory "~/.cache/emacs/auto-save/" t)
-
-(set-language-environment "UTF-8")
-(set-default-coding-systems 'utf-8)
-
-(setq-default bidi-paragraph-direction 'left-to-right
-              indent-tabs-mode nil)
-(setq bidi-inhibit-bpa t)
-
-(setopt auto-revert-avoid-polling t
-        auto-revert-interval 5
+(setopt custom-file (expand-file-name "custom.el" user-emacs-directory)
+        backup-directory-alist `(("." . ,(my/cache-file "backups/")))
+        backup-enable-predicate #'my/backup-enable-p
+        backup-by-copying t
+        auto-save-file-name-transforms `((".*" ,(my/cache-file "auto-save/") t))
+        auto-save-list-file-prefix (my/cache-file "auto-save/.saves-")
+        read-process-output-max (* 1024 1024)
+        inhibit-startup-screen t
+        ring-bell-function #'ignore
+        load-prefer-newer t
+        indent-tabs-mode nil
         ffap-machine-p-known 'reject
         window-combination-resize t
         split-window-preferred-direction 'longest
         sentence-end-double-space nil
-        column-number-mode t
-        mode-line-collapse-minor-modes nil
         display-line-numbers-width 3
         indicate-buffer-boundaries 'left
         global-hl-line-sticky-flag 'window
@@ -81,14 +60,23 @@
         use-dialog-box nil
         read-extended-command-predicate #'command-completion-default-include-p
         vc-follow-symlinks t
-        backup-by-copying t
-        bookmark-save-flag 1
         kill-do-not-save-duplicates t
         save-interprogram-paste-before-kill t
         treesit-font-lock-level 4
-        treesit-auto-install-grammar 'never)
+        treesit-auto-install-grammar 'never
+        treesit-enabled-modes '( bash-ts-mode
+                                 c-ts-mode c++-ts-mode c-or-c++-ts-mode
+                                 elixir-ts-mode heex-ts-mode
+                                 go-ts-mode go-mod-ts-mode
+                                 java-ts-mode
+                                 js-ts-mode typescript-ts-mode tsx-ts-mode
+                                 json-ts-mode toml-ts-mode yaml-ts-mode
+                                 python-ts-mode
+                                 rust-ts-mode))
 
-(global-auto-revert-mode)
+(make-directory (my/cache-file "auto-save/") t)
+
+(column-number-mode)
 (blink-cursor-mode -1)
 (pixel-scroll-precision-mode)
 (repeat-mode)
@@ -96,24 +84,99 @@
 (electric-pair-mode)
 (global-prettify-symbols-mode)
 (global-so-long-mode)
-(savehist-mode)
-(recentf-mode)
-(save-place-mode)
 
 (add-hook 'prog-mode-hook #'display-line-numbers-mode)
 (add-hook 'text-mode-hook #'visual-line-mode)
-(add-hook 'find-file-hook #'my/disable-auto-save-for-secrets)
 
-(mapc #'require '(config-keys config-ui config-editing config-minibuffer
-                              config-completion config-eglot config-org config-circe
-                              config-magit config-elfeed
-                              lang-cc lang-clojure lang-elixir lang-gleam lang-go
-                              lang-haskell lang-java lang-nasm lang-nix lang-ocaml
-                              lang-python lang-rust lang-shell lang-typescript lang-zig))
+(use-package autorevert
+  :custom
+  (auto-revert-avoid-polling t)
+  (auto-revert-interval 5)
+  :config (global-auto-revert-mode))
+
+(use-package savehist
+  :custom (savehist-file (my/cache-file "history"))
+  :config (savehist-mode))
+
+(use-package recentf
+  :custom
+  (recentf-save-file (my/cache-file "recentf"))
+  (recentf-auto-cleanup 'never)
+  :config (recentf-mode))
+
+(use-package saveplace
+  :custom
+  (save-place-file (my/cache-file "places"))
+  (save-place-forget-unreadable-files nil)
+  :config (save-place-mode))
+
+(use-package bookmark
+  :defer t
+  :custom
+  (bookmark-default-file (my/cache-file "bookmarks"))
+  (bookmark-save-flag 1))
+
+(use-package project
+  :defer t
+  :custom (project-list-file (my/cache-file "projects")))
+
+(use-package tramp
+  :defer t
+  :custom (tramp-persistency-file-name (my/cache-file "tramp")))
+
+(use-package eshell
+  :defer t
+  :custom (eshell-directory-name (my/cache-file "eshell/")))
+
+(use-package nsm
+  :defer t
+  :custom
+  (nsm-settings-file (my/cache-file "network-security.data"))
+  (network-security-level 'high))
+
+(use-package epg-config
+  :defer t
+  :custom (epg-pinentry-mode 'loopback))
+
+(use-package url-vars
+  :defer t
+  :custom (url-privacy-level 'paranoid))
+
+(use-package shr
+  :defer t
+  :custom (shr-inhibit-images t))
+
+(require 'config-keys)
+(require 'config-ui)
+(require 'config-editing)
+(require 'config-minibuffer)
+(require 'config-completion)
+(require 'config-eglot)
+(require 'config-org)
+(require 'config-circe)
+(require 'config-magit)
+(require 'config-elfeed)
+
+(require 'lang-cc)
+(require 'lang-clojure)
+(require 'lang-elixir)
+(require 'lang-gleam)
+(require 'lang-go)
+(require 'lang-haskell)
+(require 'lang-java)
+(require 'lang-nasm)
+(require 'lang-nix)
+(require 'lang-ocaml)
+(require 'lang-python)
+(require 'lang-rust)
+(require 'lang-shell)
+(require 'lang-typescript)
+(require 'lang-zig)
 
 (if (eq system-type 'darwin)
     (require 'config-lex)
-  (mapc #'require '(config-mu4e config-notify)))
+  (require 'config-mu4e)
+  (require 'config-notify))
 
 (use-package envrc
   :config (envrc-global-mode))
@@ -121,3 +184,5 @@
 (load custom-file 'noerror)
 
 (provide 'init)
+
+;;; init.el ends here

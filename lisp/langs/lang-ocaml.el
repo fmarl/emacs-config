@@ -3,6 +3,8 @@
 ;; SPDX-FileCopyrightText: 2026 Florian Marrero Liestmann
 ;; SPDX-License-Identifier: GPL-3.0-or-later
 
+;;; Code:
+
 (use-package tuareg
   :mode (("\\.mlp?\\'" . tuareg-mode)
          ("\\.mli\\'" . tuareg-interface-mode)
@@ -15,3 +17,5 @@
 (use-package dune :defer t)
 
 (provide 'lang-ocaml)
+
+;;; lang-ocaml.el ends here
