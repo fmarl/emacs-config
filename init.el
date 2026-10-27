@@ -157,6 +157,8 @@
 (require 'config-magit)
 (require 'config-elfeed)
 
+(require 'lang-scheme)
+(require 'lang-lisp)
 (require 'lang-cc)
 (require 'lang-clojure)
 (require 'lang-elixir)
