@@ -38,7 +38,7 @@
   :bind (:map isearch-mode-map
               ("C-." . isearch-forward-thing-at-point))
   :custom
-  (lazy-count-prefix-format "(%s/%s) ")
+  (isearch-lazy-count-prefix-format "(%s/%s) ")
   (isearch-lazy-count t)
   (isearch-allow-motion t)
   (isearch-allow-scroll t)
