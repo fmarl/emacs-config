@@ -29,7 +29,7 @@
   (org-log-into-drawer t)
   (org-return-follows-link t)
   (org-todo-keywords '((sequence "TODO(t)" "IN-PROGRESS(i)" "|" "DONE(d)" "CANCELLED(c)")))
-  (org-directory "~/org/")
+  (org-directory "~/Documents/Org/")
   (org-agenda-files '("inbox.org" "tasks.org"))
   (org-id-locations-file (my/cache-file "org-id-locations"))
   (org-capture-templates
@@ -74,7 +74,7 @@
    ("C-c n d" . denote-dired)
    ("C-c n g" . denote-grep))
   :custom
-  (denote-directory "~/org/denote/")
+  (denote-directory "~/Documents/Org/denote/")
   :config
   (denote-rename-buffer-mode))
 
